@@ -6,3 +6,5 @@ if [[ ! -e ~/.aws/credentials ]]; then
 fi
 
 BUCKET="nodesource-public-cloudformation"
+aws s3 sync ./templates s3://$BUCKET/nsolid/
+echo "Templates Updated"
