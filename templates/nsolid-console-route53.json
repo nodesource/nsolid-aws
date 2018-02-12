@@ -140,26 +140,26 @@
         },
         "Domain": "vpc"
       }
-    }
-  },
-  "ConsoleDomain": {
-    "Type": "AWS::Route53::RecordSet",
-    "DependsOn": "ConsoleEIP",
-    "Properties": {
-      "Comment": "N|Solid Console",
-      "HostedZoneId": {
-        "Ref": "Route53Zone"
-      },
-      "Name": {
-        "Ref": "ConsoleURL"
-      },
-      "ResourceRecords": [
-        {
-          "Ref": "ConsoleEIP"
-        }
-      ],
-      "TTL": "900",
-      "Type": "A"
+    },
+    "ConsoleDomain": {
+      "Type": "AWS::Route53::RecordSet",
+      "DependsOn": "ConsoleEIP",
+      "Properties": {
+        "Comment": "N|Solid Console",
+        "HostedZoneId": {
+          "Ref": "Route53Zone"
+        },
+        "Name": {
+          "Ref": "ConsoleURL"
+        },
+        "ResourceRecords": [
+          {
+            "Ref": "ConsoleEIP"
+          }
+        ],
+        "TTL": "900",
+        "Type": "A"
+      }
     }
   },
   "Outputs": {

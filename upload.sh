@@ -15,6 +15,8 @@ for file in templates/*.json; do
     exit $rc
   fi
 done
+echo "Templates are valid. Uploading..."
+echo ""
 
 BUCKET="nodesource-public-cloudformation"
 aws s3 sync ./templates s3://$BUCKET/nsolid/
