@@ -1,0 +1,136 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Run N|Solid Runtime in AWS",
+  "Mappings": {
+    "RuntimeAMI": {
+      "ap-northeast-1": {
+        "AMI": "ami-58ef533e"
+      },
+      "ap-southeast-1": {
+        "AMI": "ami-2e98ce4d"
+      },
+      "ap-southeast-2": {
+        "AMI": "ami-4dc42e2f"
+      },
+      "ca-central-1": {
+        "AMI": "ami-a8843fcc"
+      },
+      "eu-central-1": {
+        "AMI": "ami-95098bfa"
+      },
+      "eu-west-1": {
+        "AMI": "ami-dfcd7ba6"
+      },
+      "eu-west-2": {
+        "AMI": "ami-f0e9f694"
+      },
+      "us-east-1": {
+        "AMI": "ami-2fb02555"
+      },
+      "us-east-2": {
+        "AMI": "ami-d4ddf3b1"
+      },
+      "us-west-1": {
+        "AMI": "ami-e0ab9380"
+      },
+      "us-west-2": {
+        "AMI": "ami-0eda0676"
+      }
+    }
+  },
+  "Parameters": {
+    "SSHKey": {
+      "Description": "Amazon EC2 Key Pair",
+      "Type": "AWS::EC2::KeyPair::KeyName"
+    },
+    "RuntimeSubnet": {
+      "Description": "Subnet ID to run N|Solid Runtime in",
+      "Type": "AWS::EC2::Subnet::Id"
+    },
+    "RuntimeVPC": {
+      "Description": "VPC ID to run N|Solid Runtime in",
+      "Type": "AWS::EC2::VPC::Id"
+    }
+  },
+  "Resources": {
+    "RuntimeSecurityGroup": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupName": "NSolid-Runtime",
+        "GroupDescription": "Security Group for NSolid Runtime",
+        "SecurityGroupIngress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "IpProtocol": "tcp",
+            "FromPort": "22",
+            "ToPort": "22"
+          }
+        ],
+        "VpcId": {
+          "Ref": "RuntimeVPC"
+        }
+      }
+    },
+    "RuntimeServer": {
+      "Type": "AWS::EC2::Instance",
+      "DependsOn": "RuntimeSecurityGroup",
+      "Properties": {
+        "BlockDeviceMappings": [
+          {
+            "DeviceName": "/dev/sda1",
+            "Ebs": {
+              "VolumeSize": "30"
+            }
+          }
+        ],
+        "ImageId": {
+          "Fn::FindInMap": [
+            "RuntimeAMI",
+            {
+              "Ref": "AWS::Region"
+            },
+            "AMI"
+          ]
+        },
+        "InstanceType": "m5.large",
+        "KeyName": {
+          "Ref": "SSHKey"
+        },
+        "SecurityGroupIds": [
+          {
+            "Ref": "RuntimeSecurityGroup"
+          }
+        ],
+        "SubnetId": {
+          "Ref": "RuntimeSubnet"
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "N|Solid-Runtime"
+          }
+        ]
+      }
+    },
+    "RuntimeEIP": {
+      "Type": "AWS::EC2::EIP",
+      "Properties": {
+        "InstanceId": {
+          "Ref": "RuntimeServer"
+        },
+        "Domain": "vpc"
+      }
+    }
+  },
+  "Outputs": {
+    "RuntimeIP": {
+      "Description": "Public IP Address of the N|Solid Runtime Server",
+      "Export": {
+        "Name": "nsolid-runtime-ip"
+      },
+      "Value": {
+        "Ref": "RuntimeEIP"
+      }
+    }
+  }
+}
