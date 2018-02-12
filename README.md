@@ -1,5 +1,7 @@
 # N|Solid on AWS
 
+[N|Solid](/images/nsolid.png)]
+
 tag line
 
 ## Getting Started
