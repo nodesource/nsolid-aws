@@ -1,0 +1,206 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Quickly get N|Solid 3.0.4 running in AWS",
+  "Parameters": {
+    "SSHKey": {
+      "Description": "Amazon EC2 Key Pair",
+      "Type": "AWS::EC2::KeyPair::KeyName"
+    },
+    "ConsoleAMI": {
+      "Default": "ami-asdf",
+      "Description": "AMI ID of the N|Solid Console",
+      "Type": "AWS::EC2::Image::Id"
+    },
+    "RuntimeAMI": {
+      "Default": "ami-asdf",
+      "Description": "AMI ID of the N|Solid Runtime",
+      "Type": "AWS::EC2::Image::Id"
+    },
+    "ConsoleSubnet": {
+      "Description": "Subnet ID to run N|Solid Console in",
+      "Type": "AWS::EC2::Subnet::Id"
+    },
+    "ConsoleVPC": {
+      "Description": "VPC ID to run N|Solid Console in",
+      "Type": "AWS::EC2::VPC::Id"
+    },
+    "RuntimeSubnet": {
+      "Description": "Subnet ID to run N|Solid Runtime in",
+      "Type": "AWS::EC2::Subnet::Id"
+    },
+    "RuntimeVPC": {
+      "Description": "VPC ID to run N|Solid Runtime in",
+      "Type": "AWS::EC2::VPC::Id"
+    }
+  },
+  "Resources": {
+    "ConsoleSecurityGroup": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "GroupName": "NSolid-Console",
+      "GroupDescription": "Security Group for N|Solid Console",
+      "SecurityGroupIngress": [
+        {
+          "CidrIp": "0.0.0.0/0",
+          "IpProtocol": "tcp",
+          "FromPort": "22",
+          "ToPort": "22"
+        },
+        {
+          "CidrIp": "0.0.0.0/0",
+          "IpProtocol": "tcp",
+          "FromPort": "80",
+          "ToPort": "80"
+        },
+        {
+          "CidrIp": "0.0.0.0/0",
+          "IpProtocol": "tcp",
+          "FromPort": "9001",
+          "ToPort": "9003"
+        }
+      ],
+      "VpcId": {
+        "Ref": "ConsoleVPC"
+      }
+    },
+    "RuntimeSecurityGroup": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "GroupName": "NSolid-Runtime",
+      "GroupDescription": "Security Group for N|Solid Runtime",
+      "SecurityGroupIngress": [
+        {
+          "CidrIp": "0.0.0.0/0",
+          "IpProtocol": "tcp",
+          "FromPort": "22",
+          "ToPort": "22"
+        }
+      ],
+      "VpcId": {
+        "Ref": "RuntimeVPC"
+      }
+    },
+    "ConsoleServer": {
+      "Type": "AWS::EC2::Instance",
+      "DependsOn": "ConsoleSecurityGroup",
+      "Properties": {
+        "BlockDeviceMappings": [
+          {
+            "DeviceName": "/dev/sda1",
+            "Ebs": {
+              "VolumeSize": "50"
+            }
+          }
+        ],
+        "ImageId": {
+          "Ref": "ConsoleAMI"
+        },
+        "InstanceType": "m5.large",
+        "KeyName": {
+          "Ref": "SSHKey"
+        },
+        "NetworkInterfaces": [
+          {
+            "DeviceIndex": "0",
+            "NetworkInterfaceId": {
+              "Ref": "ConsoleENI"
+            }
+          }
+        ],
+        "SecurityGroupIds": [
+          {
+            "Ref": "ConsoleSecurityGroup"
+          }
+        ],
+        "SubnetId": {
+          "Ref": "ConsoleSubnet"
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "N|Solid-Console"
+          }
+        ]
+      }
+    },
+    "RuntimeServer": {
+      "Type": "AWS::EC2::Instance",
+      "DependsOn": "RuntimeSecurityGroup",
+      "Properties": {
+        "BlockDeviceMappings": [
+          {
+            "DeviceName": "/dev/sda1",
+            "Ebs": {
+              "VolumeSize": "30"
+            }
+          }
+        ],
+        "ImageId": {
+          "Ref": "RuntimeAMI"
+        },
+        "InstanceType": "m5.large",
+        "KeyName": {
+          "Ref": "SSHKey"
+        },
+        "NetworkInterfaces": [
+          {
+            "DeviceIndex": "0",
+            "NetworkInterfaceId": {
+              "Ref": "RuntimeENI"
+            }
+          }
+        ],
+        "SecurityGroupIds": [
+          {
+            "Ref": "RuntimeSecurityGroup"
+          }
+        ],
+        "SubnetId": {
+          "Ref": "RuntimeSubnet"
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "N|Solid-Runtime"
+          }
+        ]
+      }
+    }
+  },
+  "ConsoleEIP": {
+    "Type": "AWS::EC2::EIP",
+    "Properties": {
+      "InstanceId": {
+        "Ref": "ConsoleServer"
+      },
+      "Domain": "vpc"
+    }
+  },
+  "RuntimeEIP": {
+    "Type": "AWS::EC2::EIP",
+    "Properties": {
+      "InstanceId": {
+        "Ref": "RuntimeServer"
+      },
+      "Domain": "vpc"
+    }
+  },
+  "Outputs": {
+    "ConsoleIP": {
+      "Description": "Public IP Address of the N|Solid Console Server",
+      "Export": {
+        "Name": "nsolid-console-ip"
+      },
+      "Value": {
+        "Ref": "ConsoleEIP"
+      }
+    },
+    "RuntimeIP": {
+      "Description": "Public IP Address of the N|Solid Runtime Server",
+      "Export": {
+        "Name": "nsolid-runtime-ip"
+      },
+      "Value": {
+        "Ref": "RuntimeEIP"
+      }
+    }
+  }
+}
