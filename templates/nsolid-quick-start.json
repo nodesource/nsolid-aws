@@ -1,18 +1,106 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "Quickly get N|Solid 3.0.4 running in AWS",
+  "Description": "Quickly get N|Solid running in AWS",
+  "Mappings": {
+    "ConsoleAMI": {
+      "ap-northeast-1": {
+        "AMI": "ami-58ef533e"
+      },
+      "ap-southeast-1": {
+        "AMI": "ami-2e98ce4d"
+      },
+      "ap-southeast-2": {
+        "AMI": "ami-4dc42e2f"
+      },
+      "ca-central-1": {
+        "AMI": "ami-a8843fcc"
+      },
+      "eu-central-1": {
+        "AMI": "ami-95098bfa"
+      },
+      "eu-west-1": {
+        "AMI": "ami-dfcd7ba6"
+      },
+      "eu-west-2": {
+        "AMI": "ami-f0e9f694"
+      },
+      "us-east-1": {
+        "AMI": "ami-2fb02555"
+      },
+      "us-east-2": {
+        "AMI": "ami-d4ddf3b1"
+      },
+      "us-west-1": {
+        "AMI": "ami-e0ab9380"
+      },
+      "us-west-2": {
+        "AMI": "ami-0eda0676"
+      }
+    },
+    "RuntimeAMI": {
+      "ap-northeast-1": {
+        "AMI": "ami-58ef533e"
+      },
+      "ap-southeast-1": {
+        "AMI": "ami-2e98ce4d"
+      },
+      "ap-southeast-2": {
+        "AMI": "ami-4dc42e2f"
+      },
+      "ca-central-1": {
+        "AMI": "ami-a8843fcc"
+      },
+      "eu-central-1": {
+        "AMI": "ami-95098bfa"
+      },
+      "eu-west-1": {
+        "AMI": "ami-dfcd7ba6"
+      },
+      "eu-west-2": {
+        "AMI": "ami-f0e9f694"
+      },
+      "us-east-1": {
+        "AMI": "ami-2fb02555"
+      },
+      "us-east-2": {
+        "AMI": "ami-d4ddf3b1"
+      },
+      "us-west-1": {
+        "AMI": "ami-e0ab9380"
+      },
+      "us-west-2": {
+        "AMI": "ami-0eda0676"
+      }
+    }
+  },
   "Parameters": {
     "SSHKey": {
       "Description": "Amazon EC2 Key Pair",
       "Type": "AWS::EC2::KeyPair::KeyName"
     },
     "ConsoleAMI": {
-      "Default": "ami-asdf",
+      "Default": {
+        "Fn::FindInMap": [
+          "ConsoleAMI",
+          {
+            "Ref": "AWS::Region"
+          },
+          "AMI"
+        ]
+      },
       "Description": "AMI ID of the N|Solid Console",
       "Type": "AWS::EC2::Image::Id"
     },
     "RuntimeAMI": {
-      "Default": "ami-asdf",
+      "Default": {
+        "Fn::FindInMap": [
+          "RuntimeAMI",
+          {
+            "Ref": "AWS::Region"
+          },
+          "AMI"
+        ]
+      },
       "Description": "AMI ID of the N|Solid Runtime",
       "Type": "AWS::EC2::Image::Id"
     },
