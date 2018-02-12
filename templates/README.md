@@ -45,6 +45,16 @@ _Deploy_
 
 [![Launch Stack CloudFormation](/images/deploy-to-aws.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=nsolid-console-autoscaling&templateURL=https://s3-us-west-2.amazonaws.com/nodesource-public-cloudformation/nsolid/nsolid-console-only.json)
 
+## `nsolid-console-route53`
+
+_Description_
+
+blah blah blah
+
+_Deploy_
+
+[![Launch Stack CloudFormation](/images/deploy-to-aws.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=nsolid-console-autoscaling&templateURL=https://s3-us-west-2.amazonaws.com/nodesource-public-cloudformation/nsolid/nsolid-console-route53.json)
+
 ## `nsolid-quick-start`
 
 _Description_
