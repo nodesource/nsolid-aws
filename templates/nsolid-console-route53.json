@@ -45,7 +45,7 @@
         "Disabled"
       ],
       "ConstraintDescription": "Must be either Enabled or Disabled",
-      "Description": "Public IP for Console Instance",
+      "Description": "If Enabled, the Console instance will get an Elastic IP",
       "Default": "Disabled",
       "Type": "String"
     },
