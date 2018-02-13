@@ -39,6 +39,16 @@
     }
   },
   "Parameters": {
+    "PublicAccess": {
+      "AllowedValues": [
+        "Enabled",
+        "Disabled"
+      ],
+      "ConstraintDescription": "Must be either Enabled or Disabled",
+      "Description": "Public IP for Console Instance",
+      "Default": "Disabled",
+      "Type": "String"
+    },
     "SSHKey": {
       "Description": "Amazon EC2 Key Pair",
       "Type": "AWS::EC2::KeyPair::KeyName"
@@ -50,6 +60,16 @@
     "ConsoleVPC": {
       "Description": "VPC ID to run N|Solid Console in",
       "Type": "AWS::EC2::VPC::Id"
+    }
+  },
+  "Conditions": {
+    "PublicAccess": {
+      "Fn::Equals": [
+        {
+          "Ref": "PublicAccess"
+        },
+        "Enabled"
+      ]
     }
   },
   "Resources": {
@@ -126,6 +146,7 @@
     },
     "ConsoleEIP": {
       "Type": "AWS::EC2::EIP",
+      "Condition": "PublicAccess",
       "Properties": {
         "InstanceId": {
           "Ref": "ConsoleServer"
@@ -141,7 +162,18 @@
         "Name": "nsolid-console-ip"
       },
       "Value": {
-        "Ref": "ConsoleEIP"
+        "Fn::If": [
+          "PublicAccess",
+          {
+            "Ref": "ConsoleEIP"
+          },
+          {
+            "Fn::GetAtt": [
+              "ConsoleServer",
+              "PrivateIp"
+            ]
+          }
+        ]
       }
     }
   }
