@@ -23,6 +23,16 @@ _Deploy_
 [![Launch Stack CloudFormation](/images/deploy-to-aws.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=nsolid-console-autoscaling&templateURL=https://s3-us-west-2.amazonaws.com/nodesource-public-cloudformation/nsolid/nsolid-console-ecs.json)
 
 
+## `nsolid-console-ecs-with-cluster`
+
+_Description_
+
+blah blah blah
+
+_Deploy_
+
+[![Launch Stack CloudFormation](/images/deploy-to-aws.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=nsolid-console-autoscaling&templateURL=https://s3-us-west-2.amazonaws.com/nodesource-public-cloudformation/nsolid/nsolid-console-ecs-with-cluster.json)
+
 
 ## `nsolid-console-elb`
 

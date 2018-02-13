@@ -1,6 +1,55 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
   "Description": "N|Solid Console in AWS ECS",
+  "Mappings": {
+    "ECSAMI": {
+      "us-east-2": {
+        "AMI": "ami-67ab9e02"
+      },
+      "us-east-1": {
+        "AMI": "ami-5e414e24"
+      },
+      "us-west-2": {
+        "AMI": "ami-10ed6968"
+      },
+      "us-west-1": {
+        "AMI": "ami-00898660"
+      },
+      "eu-west-3": {
+        "AMI": "ami-6fa21412"
+      },
+      "eu-west-2": {
+        "AMI": "ami-42a64325"
+      },
+      "eu-west-1": {
+        "AMI": "ami-880d64f1"
+      },
+      "eu-central-1": {
+        "AMI": "ami-63cbae0c"
+      },
+      "ap-northeast-2": {
+        "AMI": "ami-0acc6e64"
+      },
+      "ap-northeast-1": {
+        "AMI": "ami-e3166185"
+      },
+      "ap-southeast-2": {
+        "AMI": "ami-36867d54"
+      },
+      "ap-southeast-1": {
+        "AMI": "ami-66c98f1a"
+      },
+      "ca-central-1": {
+        "AMI": "ami-4b9c182f"
+      },
+      "ap-south-1": {
+        "AMI": "ami-ca8ad9a5"
+      },
+      "sa-east-1": {
+        "AMI": "ami-69f7b805"
+      }
+    }
+  },
   "Parameters": {
     "ClusterName": {
       "Description": "Name of new ECS Cluster",
@@ -158,11 +207,11 @@
       "Properties": {
         "ImageId": {
           "Fn::FindInMap": [
-            "AWSRegionToAMI",
+            "ECSAMI",
             {
               "Ref": "AWS::Region"
             },
-            "AMIID"
+            "AMI"
           ]
         },
         "SecurityGroups": [
@@ -321,14 +370,6 @@
     "ConsoleTaskDefinition": {
       "Type": "AWS::ECS::TaskDefinition",
       "Properties": {
-        "Volumes": [
-          {
-            "Name": "console-storage",
-            "Host": {
-              "SourcePath": "/nsolid/console"
-            }
-          }
-        ],
         "TaskRoleArn": {
           "Ref": "TaskRole"
         },
@@ -338,12 +379,6 @@
             "Essential": "True",
             "Image": "nodesource/nsolid-console:latest",
             "Memory": 256,
-            "MountPoints": [
-              {
-                "SourceVolume": "console-storage",
-                "ContainerPath": "/var/lib/nsolid/console"
-              }
-            ],
             "Name": "nsolid-console",
             "PortMappings": [
               {
@@ -405,7 +440,7 @@
     }
   },
   "Outputs": {
-    "ConsoleIP": {
+    "ConsoleURL": {
       "Description": "DNS Name of Load Balancer",
       "Export": {
         "Name": "nsolid-console-url"
