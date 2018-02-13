@@ -6,10 +6,6 @@
       "Description": "Name of existing ECS Cluster",
       "Type": "String"
     },
-    "SSHKey": {
-      "Description": "Amazon EC2 Key Pair",
-      "Type": "AWS::EC2::KeyPair::KeyName"
-    },
     "Subnets": {
       "Description": "Subnet IDs for the Load Balancer",
       "Type": "List<AWS::EC2::Subnet::Id>"

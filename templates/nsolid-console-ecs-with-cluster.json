@@ -6,6 +6,10 @@
       "Description": "Name of new ECS Cluster",
       "Type": "String"
     },
+    "SSHKey": {
+      "Description": "Amazon EC2 Key Pair",
+      "Type": "AWS::EC2::KeyPair::KeyName"
+    },
     "HostSubnet": {
       "Description": "Subnet to put the ECS Host in",
       "Type": "AWS::EC2::Subnet::Id"
@@ -141,7 +145,7 @@
       "Type": "AWS::AutoScaling::AutoScalingGroup",
       "Properties": {
         "VPCZoneIdentifier": {
-          "Ref": "SubnetId"
+          "Ref": "Subnets"
         },
         "LaunchConfigurationName": "NSolid-Cluster-Instances",
         "MinSize": "1",
