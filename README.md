@@ -1,6 +1,6 @@
-# N|Solid on AWS
-
 ![N|Solid](/images/nsolid-aws.png)
+
+# N|Solid on AWS
 
 tag line
 
