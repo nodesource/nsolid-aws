@@ -3,12 +3,12 @@
   "Description": "N|Solid Console in AWS ECS",
   "Parameters": {
     "ClusterName": {
-      "Description": "Name of existing ECS Cluster",
+      "Description": "Name of new ECS Cluster",
       "Type": "String"
     },
-    "SSHKey": {
-      "Description": "Amazon EC2 Key Pair",
-      "Type": "AWS::EC2::KeyPair::KeyName"
+    "HostSubnet": {
+      "Description": "Subnet to put the ECS Host in",
+      "Type": "AWS::EC2::Subnet::Id"
     },
     "Subnets": {
       "Description": "Subnet IDs for the Load Balancer",
@@ -103,6 +103,88 @@
           }
         ],
         "RoleName": "NSolid-Console-Task-Role"
+      }
+    },
+    "HostSecurityGroup": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupName": "NSolid-Cluster-Hosts",
+        "GroupDescription": "Security Group for NSolid ECS Cluster Hosts",
+        "SecurityGroupIngress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "IpProtocol": "tcp",
+            "FromPort": "22",
+            "ToPort": "22"
+          },
+          {
+            "CidrIp": "0.0.0.0/0",
+            "IpProtocol": "tcp",
+            "FromPort": "31000",
+            "ToPort": "61000"
+          }
+        ],
+        "VpcId": {
+          "Ref": "VPC"
+        }
+      }
+    },
+    "Cluster": {
+      "Type": "AWS::ECS::Cluster",
+      "Properties": {
+        "ClusterName": {
+          "Ref": "ClusterName"
+        }
+      }
+    },
+    "ClusterAutoScalingGroup": {
+      "Type": "AWS::AutoScaling::AutoScalingGroup",
+      "Properties": {
+        "VPCZoneIdentifier": {
+          "Ref": "SubnetId"
+        },
+        "LaunchConfigurationName": "NSolid-Cluster-Instances",
+        "MinSize": "1",
+        "MaxSize": "1",
+        "DesiredCapacity": "1"
+      }
+    },
+    "ClusterInstances": {
+      "Type": "AWS::AutoScaling::LaunchConfiguration",
+      "Properties": {
+        "ImageId": {
+          "Fn::FindInMap": [
+            "AWSRegionToAMI",
+            {
+              "Ref": "AWS::Region"
+            },
+            "AMIID"
+          ]
+        },
+        "SecurityGroups": [
+          {
+            "Ref": "HostSecurityGroup"
+          }
+        ],
+        "InstanceType": "m5.large",
+        "KeyName": {
+          "Ref": "SSHKey"
+        },
+        "UserData": {
+          "Fn::Base64": {
+            "Fn::Join": [
+              "",
+              [
+                "#!/bin/bash -xe\n",
+                "echo ECS_CLUSTER=",
+                {
+                  "Ref": "ClusterName"
+                },
+                " >> /etc/ecs/ecs.config\n"
+              ]
+            ]
+          }
+        }
       }
     },
     "LoadBalancer": {
@@ -235,6 +317,14 @@
     "ConsoleTaskDefinition": {
       "Type": "AWS::ECS::TaskDefinition",
       "Properties": {
+        "Volumes": [
+          {
+            "Name": "console-storage",
+            "Host": {
+              "SourcePath": "/nsolid/console"
+            }
+          }
+        ],
         "TaskRoleArn": {
           "Ref": "TaskRole"
         },
@@ -244,6 +334,12 @@
             "Essential": "True",
             "Image": "nodesource/nsolid-console:latest",
             "Memory": 256,
+            "MountPoints": [
+              {
+                "SourceVolume": "console-storage",
+                "ContainerPath": "/var/lib/nsolid/console"
+              }
+            ],
             "Name": "nsolid-console",
             "PortMappings": [
               {
