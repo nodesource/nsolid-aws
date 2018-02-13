@@ -39,6 +39,16 @@
     }
   },
   "Parameters": {
+    "PublicAccess": {
+      "AllowedValues": [
+        "Enabled",
+        "Disabled"
+      ],
+      "ConstraintDescription": "Must be either Enabled or Disabled",
+      "Description": "Public IP for Runtime Instance",
+      "Default": "Disabled",
+      "Type": "String"
+    },
     "SSHKey": {
       "Description": "Amazon EC2 Key Pair",
       "Type": "AWS::EC2::KeyPair::KeyName"
@@ -50,6 +60,16 @@
     "RuntimeVPC": {
       "Description": "VPC ID to run N|Solid Runtime in",
       "Type": "AWS::EC2::VPC::Id"
+    }
+  },
+  "Conditions": {
+    "PublicAccess": {
+      "Fn::Equals": [
+        {
+          "Ref": "PublicAccess"
+        },
+        "Enabled"
+      ]
     }
   },
   "Resources": {
@@ -114,6 +134,7 @@
     },
     "RuntimeEIP": {
       "Type": "AWS::EC2::EIP",
+      "Condition": "PublicAccess",
       "Properties": {
         "InstanceId": {
           "Ref": "RuntimeServer"
@@ -129,7 +150,18 @@
         "Name": "nsolid-runtime-ip"
       },
       "Value": {
-        "Ref": "RuntimeEIP"
+        "Fn::If": [
+          "PublicAccess",
+          {
+            "Ref": "RuntimeEIP"
+          },
+          {
+            "Fn::GetAtt": [
+              "RuntimeServer",
+              "PrivateIp"
+            ]
+          }
+        ]
       }
     }
   }
