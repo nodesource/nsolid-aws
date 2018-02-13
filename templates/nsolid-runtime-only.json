@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "Run N|Solid Runtime in AWS",
+  "Description": "N|Solid Runtime in AWS",
   "Mappings": {
     "RuntimeAMI": {
       "ap-northeast-1": {

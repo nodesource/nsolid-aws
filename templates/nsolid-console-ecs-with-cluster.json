@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "N|Solid Console in AWS ECS",
+  "Description": "N|Solid Console in AWS ECS with Cluster",
   "Mappings": {
     "ECSAMI": {
       "us-east-2": {

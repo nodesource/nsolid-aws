@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "Quickly get N|Solid running in AWS",
+  "Description": "N|Solid in AWS Quick Start",
   "Mappings": {
     "ConsoleAMI": {
       "ap-northeast-1": {

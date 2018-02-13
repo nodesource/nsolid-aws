@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "Run N|Solid Console in AWS",
+  "Description": "N|Solid Console in AWS",
   "Mappings": {
     "ConsoleAMI": {
       "ap-northeast-1": {
