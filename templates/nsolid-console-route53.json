@@ -164,7 +164,6 @@
     },
     "ConsoleDomain": {
       "Type": "AWS::Route53::RecordSet",
-      "DependsOn": "ConsoleEIP",
       "Properties": {
         "Comment": "N|Solid Console",
         "HostedZoneId": {
