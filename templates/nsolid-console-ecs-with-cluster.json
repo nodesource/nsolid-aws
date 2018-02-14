@@ -59,7 +59,7 @@
       "Description": "Subnet to put the ECS Host in",
       "Type": "AWS::EC2::Subnet::Id"
     },
-    "Subnets": {
+    "LoadBalancerSubnets": {
       "Description": "Subnet IDs for the Load Balancer",
       "Type": "List<AWS::EC2::Subnet::Id>"
     },
@@ -69,6 +69,65 @@
     }
   },
   "Resources": {
+    "HostRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "sts:AssumeRole"
+              ],
+              "Effect": "Allow",
+              "Principal": {
+                "Service": [
+                  "ec2.amazonaws.com"
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Path": "/",
+        "Policies": [
+          {
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Action": [
+                    "ecs:DeregisterContainerInstance",
+                    "ecs:DiscoverPollEndpoint",
+                    "ecs:Poll",
+                    "ecs:RegisterContainerInstance",
+                    "ecs:StartTelemetrySession",
+                    "ecs:Submit*",
+                    "logs:CreateLogStream",
+                    "logs:PutLogEvents"
+                  ],
+                  "Effect": "Allow",
+                  "Resource": "*"
+                }
+              ],
+              "Version": "2012-10-17"
+            },
+            "PolicyName": "NSolid-Cluster-Host-Policy"
+          }
+        ],
+        "RoleName": "NSolid-Cluster-Host-Role"
+      }
+    },
+    "HostInstanceProfile": {
+      "Type": "AWS::IAM::InstanceProfile",
+      "Properties": {
+        "Path": "/",
+        "Roles": [
+          {
+            "Ref": "HostRole"
+          }
+        ],
+        "InstanceProfileName": "NSolid-Cluster-Host-InstanceProfile"
+      }
+    },
     "ServiceRole": {
       "Type": "AWS::IAM::Role",
       "Properties": {
@@ -169,8 +228,14 @@
           {
             "CidrIp": "0.0.0.0/0",
             "IpProtocol": "tcp",
-            "FromPort": "31000",
-            "ToPort": "61000"
+            "FromPort": "6753",
+            "ToPort": "6753"
+          },
+          {
+            "CidrIp": "0.0.0.0/0",
+            "IpProtocol": "tcp",
+            "FromPort": "9001",
+            "ToPort": "9003"
           }
         ],
         "VpcId": {
@@ -212,7 +277,7 @@
       "Type": "AWS::ElasticLoadBalancing::LoadBalancer",
       "Properties": {
         "HealthCheck": {
-          "Target": "HTTP:6753/",
+          "Target": "TCP:9001",
           "HealthyThreshold": "3",
           "UnhealthyThreshold": "4",
           "Interval": "10",
@@ -252,7 +317,7 @@
           }
         ],
         "Subnets": {
-          "Ref": "Subnets"
+          "Ref": "LoadBalancerSubnets"
         }
       }
     },
@@ -261,14 +326,21 @@
       "DependsOn": "ClusterInstances",
       "Properties": {
         "VPCZoneIdentifier": {
-          "Ref": "Subnets"
+          "Ref": "LoadBalancerSubnets"
         },
         "LaunchConfigurationName": {
           "Ref": "ClusterInstances"
         },
         "MinSize": "1",
         "MaxSize": "1",
-        "DesiredCapacity": "1"
+        "DesiredCapacity": "1",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "N|Solid-Cluster-Host",
+            "PropagateAtLaunch": "True"
+          }
+        ]
       }
     },
     "ClusterInstances": {
@@ -282,6 +354,9 @@
             }
           }
         ],
+        "IamInstanceProfile": {
+          "Ref": "HostInstanceProfile"
+        },
         "ImageId": {
           "Fn::FindInMap": [
             "ECSAMI",
@@ -300,19 +375,13 @@
         "KeyName": {
           "Ref": "SSHKey"
         },
-        "Tags": [
-          {
-            "Key": "Name",
-            "Value": "N|Solid-Console"
-          }
-        ],
         "UserData": {
           "Fn::Base64": {
             "Fn::Join": [
               "",
               [
                 "#!/bin/bash -xe\n",
-                "echo ECS_CLUSTER=\"NSolid-Cluster\">> /etc/ecs/ecs.config\n"
+                "echo ECS_CLUSTER=\"NSolid-Cluster\" >> /etc/ecs/ecs.config\n"
               ]
             ]
           }
