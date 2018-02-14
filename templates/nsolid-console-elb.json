@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "N|Solid Console in AWS with Load Balancer",
+  "Description": "N|Solid Console in AWS with Classic Elastic Load Balancer",
   "Mappings": {
     "ConsoleAMI": {
       "ap-northeast-1": {
