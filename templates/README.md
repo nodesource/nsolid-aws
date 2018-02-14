@@ -1,22 +1,22 @@
 # N|Solid CloudFormation Templates
 
 
-## `nsolid-console-autoscaling`
-
-_Description_
-
-blah blah blah
-
-_Deploy_
-
-[![Launch Stack CloudFormation](/images/deploy-to-aws.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=nsolid-console-autoscaling&templateURL=https://s3-us-west-2.amazonaws.com/nodesource-public-cloudformation/nsolid/nsolid-console-autoscaling.json)
-
-
 ## `nsolid-console-ecs`
 
 _Description_
 
 blah blah blah
+
+**Resources Created**
+
+|           Resource            |
+|-------------------------------|
+|      ECS Service IAM Role     |
+|       ECS Task IAM Role       |
+|        Security Group         |
+| Classic Elastic Load Balancer |
+|      ECS Task Definition      |
+|          ECS Service          |
 
 _Deploy_
 
@@ -29,6 +29,21 @@ _Description_
 
 blah blah blah
 
+**Resources Created**
+
+|           Resource            |
+|-------------------------------|
+|         ECS Cluster           |
+|         EC2 Instance          |
+|       AutoScaling Group       |
+|      Launch Configuration     |
+|      ECS Service IAM Role     |
+|       ECS Task IAM Role       |
+|       2 Security Groups       |
+| Classic Elastic Load Balancer |
+|      ECS Task Definition      |
+|          ECS Service          |
+
 _Deploy_
 
 [![Launch Stack CloudFormation](/images/deploy-to-aws.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=nsolid-console-autoscaling&templateURL=https://s3-us-west-2.amazonaws.com/nodesource-public-cloudformation/nsolid/nsolid-console-ecs-with-cluster.json)
@@ -39,6 +54,16 @@ _Deploy_
 _Description_
 
 blah blah blah
+
+**Resources Created**
+
+|           Resource            |
+|-------------------------------|
+|         EC2 Instance          |
+|       AutoScaling Group       |
+|      Launch Configuration     |
+|       2 Security Groups       |
+| Classic Elastic Load Balancer |
 
 _Deploy_
 
@@ -51,6 +76,14 @@ _Description_
 
 blah blah blah
 
+**Resources Created**
+
+|           Resource            |
+|-------------------------------|
+|         EC2 Instance          |
+|        Security Group         |
+|    Elastic IP _(optional)_    |
+
 _Deploy_
 
 [![Launch Stack CloudFormation](/images/deploy-to-aws.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=nsolid-console-autoscaling&templateURL=https://s3-us-west-2.amazonaws.com/nodesource-public-cloudformation/nsolid/nsolid-console-only.json)
@@ -62,6 +95,15 @@ _Description_
 
 blah blah blah
 
+**Resources Created**
+
+|           Resource            |
+|-------------------------------|
+|         EC2 Instance          |
+|        Security Group         |
+|    Elastic IP _(optional)_    |
+|       Route53 A Record        |
+
 _Deploy_
 
 [![Launch Stack CloudFormation](/images/deploy-to-aws.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=nsolid-console-autoscaling&templateURL=https://s3-us-west-2.amazonaws.com/nodesource-public-cloudformation/nsolid/nsolid-console-route53.json)
@@ -71,6 +113,14 @@ _Deploy_
 _Description_
 
 blah blah blah
+
+**Resources Created**
+
+|           Resource            |
+|-------------------------------|
+|        2 EC2 Instances        |
+|       2 Security Groups       |
+|         2 Elastic IPs         |
 
 _Deploy_
 
@@ -82,6 +132,14 @@ _Deploy_
 _Description_
 
 blah blah blah
+
+**Resources Created**
+
+|           Resource            |
+|-------------------------------|
+|         EC2 Instance          |
+|        Security Group         |
+|    Elastic IP _(optional)_    |
 
 _Deploy_
 

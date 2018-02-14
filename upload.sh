@@ -8,7 +8,7 @@ fi
 for file in templates/*.json; do
   echo ""
   echo "Validating $file"
-  #aws cloudformation validate-template --template-body file://$file
+  aws cloudformation validate-template --template-body file://$file
   rc=$?
   echo ""
   if [[ $rc != 0 ]]; then

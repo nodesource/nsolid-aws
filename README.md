@@ -2,7 +2,7 @@
 
 # N|Solid on AWS
 
-tag line
+N|Solid is a fully-compatible enhanced Node.js platform built for mission-critical applications. N|Solid enables organizations to build, manage, secure, and analyze Node.js applications.
 
 ## Getting Started
 
