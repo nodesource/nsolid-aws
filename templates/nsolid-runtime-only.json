@@ -145,7 +145,7 @@
   },
   "Outputs": {
     "RuntimeIP": {
-      "Description": "Public IP Address of the N|Solid Runtime Server",
+      "Description": "IP Address of the N|Solid Runtime Server",
       "Export": {
         "Name": "nsolid-runtime-ip"
       },

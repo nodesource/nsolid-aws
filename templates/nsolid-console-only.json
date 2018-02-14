@@ -157,7 +157,7 @@
   },
   "Outputs": {
     "ConsoleIP": {
-      "Description": "Public IP Address of the N|Solid Console Server",
+      "Description": "IP Address of the N|Solid Console Server",
       "Export": {
         "Name": "nsolid-console-ip"
       },

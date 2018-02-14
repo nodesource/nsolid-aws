@@ -6,7 +6,7 @@
       "Description": "Name of existing ECS Cluster",
       "Type": "String"
     },
-    "Subnets": {
+    "LoadBalancerSubnets": {
       "Description": "Subnet IDs for the Load Balancer",
       "Type": "List<AWS::EC2::Subnet::Id>"
     },
@@ -169,7 +169,7 @@
           }
         ],
         "Subnets": {
-          "Ref": "Subnets"
+          "Ref": "LoadBalancerSubnets"
         }
       }
     },
@@ -241,7 +241,7 @@
     }
   },
   "Outputs": {
-    "ConsoleIP": {
+    "ConsoleURL": {
       "Description": "DNS Name of Load Balancer",
       "Export": {
         "Name": "nsolid-console-url"
