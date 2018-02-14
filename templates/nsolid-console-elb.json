@@ -39,16 +39,6 @@
     }
   },
   "Parameters": {
-    "PublicAccess": {
-      "AllowedValues": [
-        "Enabled",
-        "Disabled"
-      ],
-      "ConstraintDescription": "Must be either Enabled or Disabled",
-      "Description": "If Enabled, the Console instance will get an Elastic IP",
-      "Default": "Disabled",
-      "Type": "String"
-    },
     "SSHKey": {
       "Description": "Amazon EC2 Key Pair",
       "Type": "AWS::EC2::KeyPair::KeyName"
@@ -57,19 +47,13 @@
       "Description": "Subnet ID to run N|Solid Console in",
       "Type": "AWS::EC2::Subnet::Id"
     },
-    "ConsoleVPC": {
+    "LoadBalancerSubnets": {
+      "Description": "Subnet IDs for the Load Balancer",
+      "Type": "List<AWS::EC2::Subnet::Id>"
+    },
+    "VPC": {
       "Description": "VPC ID to run N|Solid Console in",
       "Type": "AWS::EC2::VPC::Id"
-    }
-  },
-  "Conditions": {
-    "PublicAccess": {
-      "Fn::Equals": [
-        {
-          "Ref": "PublicAccess"
-        },
-        "Enabled"
-      ]
     }
   },
   "Resources": {
@@ -77,7 +61,7 @@
       "Type": "AWS::EC2::SecurityGroup",
       "Properties": {
         "GroupName": "NSolid-Console",
-        "GroupDescription": "Security Group for NSolid Console",
+        "GroupDescription": "Security Group for NSolid Console Instance",
         "SecurityGroupIngress": [
           {
             "CidrIp": "0.0.0.0/0",
@@ -103,9 +87,94 @@
         }
       }
     },
-    "ConsoleServer": {
-      "Type": "AWS::EC2::Instance",
-      "DependsOn": "ConsoleSecurityGroup",
+    "LoadBalancerSecurityGroup": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupName": "NSolid-Console-LoadBalancer",
+        "GroupDescription": "Security Group for NSolid Console Load Balancer",
+        "SecurityGroupIngress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "IpProtocol": "tcp",
+            "FromPort": "80",
+            "ToPort": "80"
+          },
+          {
+            "CidrIp": "0.0.0.0/0",
+            "IpProtocol": "tcp",
+            "FromPort": "9001",
+            "ToPort": "9003"
+          }
+        ],
+        "VpcId": {
+          "Ref": "VPC"
+        }
+      }
+    },
+    "LoadBalancer": {
+      "Type": "AWS::ElasticLoadBalancing::LoadBalancer",
+      "Properties": {
+        "HealthCheck": {
+          "Target": "HTTP:80/",
+          "HealthyThreshold": "3",
+          "UnhealthyThreshold": "4",
+          "Interval": "10",
+          "Timeout": "5"
+        },
+        "LoadBalancerName": "NSolid-Console",
+        "Listeners": [
+          {
+            "InstancePort": 80,
+            "InstanceProtocol": "HTTP",
+            "LoadBalancerPort": 80,
+            "Protocol": "HTTP"
+          },
+          {
+            "InstancePort": 9001,
+            "InstanceProtocol": "TCP",
+            "LoadBalancerPort": 9001,
+            "Protocol": "TCP"
+          },
+          {
+            "InstancePort": 9002,
+            "InstanceProtocol": "TCP",
+            "LoadBalancerPort": 9002,
+            "Protocol": "TCP"
+          },
+          {
+            "InstancePort": 9003,
+            "InstanceProtocol": "TCP",
+            "LoadBalancerPort": 9003,
+            "Protocol": "TCP"
+          }
+        ],
+        "Scheme": "internet-facing",
+        "SecurityGroups": [
+          {
+            "Ref": "LoadBalancerSecurityGroup"
+          }
+        ],
+        "Subnets": {
+          "Ref": "LoadBalancerSubnets"
+        }
+      }
+    },
+    "AutoScalingGroup": {
+      "Type": "AWS::AutoScaling::AutoScalingGroup",
+      "Properties": {
+        "VPCZoneIdentifier": {
+          "Ref": "Subnets"
+        },
+        "LaunchConfigurationName": {
+          "Ref": "ConsoleInstance"
+        },
+        "MinSize": "1",
+        "MaxSize": "1",
+        "DesiredCapacity": "1"
+      }
+    },
+    "ConsoleInstance": {
+      "Type": "AWS::AutoScaling::LaunchConfiguration",
       "Properties": {
         "BlockDeviceMappings": [
           {
@@ -117,24 +186,21 @@
         ],
         "ImageId": {
           "Fn::FindInMap": [
-            "ConsoleAMI",
+            "ECSAMI",
             {
               "Ref": "AWS::Region"
             },
             "AMI"
           ]
         },
+        "SecurityGroups": [
+          {
+            "Ref": "HostSecurityGroup"
+          }
+        ],
         "InstanceType": "m3.xlarge",
         "KeyName": {
           "Ref": "SSHKey"
-        },
-        "SecurityGroupIds": [
-          {
-            "Ref": "ConsoleSecurityGroup"
-          }
-        ],
-        "SubnetId": {
-          "Ref": "ConsoleSubnet"
         },
         "Tags": [
           {
@@ -143,36 +209,18 @@
           }
         ]
       }
-    },
-    "ConsoleEIP": {
-      "Type": "AWS::EC2::EIP",
-      "Condition": "PublicAccess",
-      "Properties": {
-        "InstanceId": {
-          "Ref": "ConsoleServer"
-        },
-        "Domain": "vpc"
-      }
     }
   },
   "Outputs": {
-    "ConsoleIP": {
-      "Description": "Public IP Address of the N|Solid Console Server",
+    "ConsoleURL": {
+      "Description": "DNS Name of Load Balancer",
       "Export": {
-        "Name": "nsolid-console-ip"
+        "Name": "nsolid-console-url"
       },
       "Value": {
-        "Fn::If": [
-          "PublicAccess",
-          {
-            "Ref": "ConsoleEIP"
-          },
-          {
-            "Fn::GetAtt": [
-              "ConsoleServer",
-              "PrivateIp"
-            ]
-          }
+        "Fn::GetAtt": [
+          "LoadBalancer",
+          "DNSName"
         ]
       }
     }

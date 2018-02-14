@@ -274,6 +274,14 @@
     "ClusterInstances": {
       "Type": "AWS::AutoScaling::LaunchConfiguration",
       "Properties": {
+        "BlockDeviceMappings": [
+          {
+            "DeviceName": "/dev/sda1",
+            "Ebs": {
+              "VolumeSize": "50"
+            }
+          }
+        ],
         "ImageId": {
           "Fn::FindInMap": [
             "ECSAMI",
