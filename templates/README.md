@@ -3,11 +3,11 @@
 
 ## `nsolid-console-ecs`
 
-_Description_
+**Description**
 
 blah blah blah
 
-**Resources Created**
+_Resources Created_
 
 |           Resource            |
 |-------------------------------|
@@ -18,18 +18,18 @@ blah blah blah
 |      ECS Task Definition      |
 |          ECS Service          |
 
-_Deploy_
+**Deploy**
 
 [![Launch Stack CloudFormation](/images/deploy-to-aws.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=nsolid-console-autoscaling&templateURL=https://s3-us-west-2.amazonaws.com/nodesource-public-cloudformation/nsolid/nsolid-console-ecs.json)
 
 
 ## `nsolid-console-ecs-with-cluster`
 
-_Description_
+**Description**
 
 blah blah blah
 
-**Resources Created**
+_Resources Created_
 
 |           Resource            |
 |-------------------------------|
@@ -44,18 +44,18 @@ blah blah blah
 |      ECS Task Definition      |
 |          ECS Service          |
 
-_Deploy_
+**Deploy**
 
 [![Launch Stack CloudFormation](/images/deploy-to-aws.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=nsolid-console-autoscaling&templateURL=https://s3-us-west-2.amazonaws.com/nodesource-public-cloudformation/nsolid/nsolid-console-ecs-with-cluster.json)
 
 
 ## `nsolid-console-elb`
 
-_Description_
+**Description**
 
 blah blah blah
 
-**Resources Created**
+_Resources Created_
 
 |           Resource            |
 |-------------------------------|
@@ -65,56 +65,56 @@ blah blah blah
 |       2 Security Groups       |
 | Classic Elastic Load Balancer |
 
-_Deploy_
+**Deploy**
 
 [![Launch Stack CloudFormation](/images/deploy-to-aws.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=nsolid-console-autoscaling&templateURL=https://s3-us-west-2.amazonaws.com/nodesource-public-cloudformation/nsolid/nsolid-console-elb.json)
 
 
 ## `nsolid-console-only`
 
-_Description_
+**Description**
 
 blah blah blah
 
-**Resources Created**
+_Resources Created_
 
 |           Resource            |
 |-------------------------------|
 |         EC2 Instance          |
 |        Security Group         |
-|    Elastic IP _(optional)_    |
+|    Elastic IP **(optional)**    |
 
-_Deploy_
+**Deploy**
 
 [![Launch Stack CloudFormation](/images/deploy-to-aws.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=nsolid-console-autoscaling&templateURL=https://s3-us-west-2.amazonaws.com/nodesource-public-cloudformation/nsolid/nsolid-console-only.json)
 
 
 ## `nsolid-console-route53`
 
-_Description_
+**Description**
 
 blah blah blah
 
-**Resources Created**
+_Resources Created_
 
 |           Resource            |
 |-------------------------------|
 |         EC2 Instance          |
 |        Security Group         |
-|    Elastic IP _(optional)_    |
+|    Elastic IP **(optional)**    |
 |       Route53 A Record        |
 
-_Deploy_
+**Deploy**
 
 [![Launch Stack CloudFormation](/images/deploy-to-aws.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=nsolid-console-autoscaling&templateURL=https://s3-us-west-2.amazonaws.com/nodesource-public-cloudformation/nsolid/nsolid-console-route53.json)
 
 ## `nsolid-quick-start`
 
-_Description_
+**Description**
 
 blah blah blah
 
-**Resources Created**
+_Resources Created_
 
 |           Resource            |
 |-------------------------------|
@@ -122,18 +122,18 @@ blah blah blah
 |       2 Security Groups       |
 |         2 Elastic IPs         |
 
-_Deploy_
+**Deploy**
 
 [![Launch Stack CloudFormation](/images/deploy-to-aws.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=nsolid-console-autoscaling&templateURL=https://s3-us-west-2.amazonaws.com/nodesource-public-cloudformation/nsolid/nsolid-quick-start.json)
 
 
 ## `nsolid-runtime-only`
 
-_Description_
+**Description**
 
 blah blah blah
 
-**Resources Created**
+_Resources Created_
 
 |           Resource            |
 |-------------------------------|
@@ -141,6 +141,6 @@ blah blah blah
 |        Security Group         |
 |    Elastic IP _(optional)_    |
 
-_Deploy_
+**Deploy**
 
 [![Launch Stack CloudFormation](/images/deploy-to-aws.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=nsolid-console-autoscaling&templateURL=https://s3-us-west-2.amazonaws.com/nodesource-public-cloudformation/nsolid/nsolid-runtime-only.json)
