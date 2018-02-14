@@ -83,7 +83,7 @@
           }
         ],
         "VpcId": {
-          "Ref": "ConsoleVPC"
+          "Ref": "VPC"
         }
       }
     },
@@ -115,7 +115,7 @@
       "Type": "AWS::ElasticLoadBalancing::LoadBalancer",
       "Properties": {
         "HealthCheck": {
-          "Target": "HTTP:80/",
+          "Target": "TCP:9001",
           "HealthyThreshold": "3",
           "UnhealthyThreshold": "4",
           "Interval": "10",
@@ -163,14 +163,26 @@
       "Type": "AWS::AutoScaling::AutoScalingGroup",
       "Properties": {
         "VPCZoneIdentifier": {
-          "Ref": "Subnets"
+          "Ref": "LoadBalancerSubnets"
         },
+        "LoadBalancerNames": [
+          {
+            "Ref": "LoadBalancer"
+          }
+        ],
         "LaunchConfigurationName": {
           "Ref": "ConsoleInstance"
         },
         "MinSize": "1",
         "MaxSize": "1",
-        "DesiredCapacity": "1"
+        "DesiredCapacity": "1",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "N|Solid-Console",
+            "PropagateAtLaunch": "True"
+          }
+        ]
       }
     },
     "ConsoleInstance": {
@@ -186,7 +198,7 @@
         ],
         "ImageId": {
           "Fn::FindInMap": [
-            "ECSAMI",
+            "ConsoleAMI",
             {
               "Ref": "AWS::Region"
             },
@@ -195,19 +207,13 @@
         },
         "SecurityGroups": [
           {
-            "Ref": "HostSecurityGroup"
+            "Ref": "ConsoleSecurityGroup"
           }
         ],
         "InstanceType": "m3.xlarge",
         "KeyName": {
           "Ref": "SSHKey"
-        },
-        "Tags": [
-          {
-            "Key": "Name",
-            "Value": "N|Solid-Console"
-          }
-        ]
+        }
       }
     }
   },
