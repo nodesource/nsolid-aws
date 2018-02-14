@@ -51,10 +51,6 @@
     }
   },
   "Parameters": {
-    "ClusterName": {
-      "Description": "Name of new ECS Cluster",
-      "Type": "String"
-    },
     "SSHKey": {
       "Description": "Amazon EC2 Key Pair",
       "Type": "AWS::EC2::KeyPair::KeyName"
@@ -185,18 +181,91 @@
     "Cluster": {
       "Type": "AWS::ECS::Cluster",
       "Properties": {
-        "ClusterName": {
-          "Ref": "ClusterName"
+        "ClusterName": "NSolid-Cluster"
+      }
+    },
+    "LoadBalancerSecurityGroup": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupName": "NSolid-Console-LoadBalancer",
+        "GroupDescription": "Security Group for NSolid Console Load Balancer",
+        "SecurityGroupIngress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "IpProtocol": "tcp",
+            "FromPort": "80",
+            "ToPort": "80"
+          },
+          {
+            "CidrIp": "0.0.0.0/0",
+            "IpProtocol": "tcp",
+            "FromPort": "9001",
+            "ToPort": "9003"
+          }
+        ],
+        "VpcId": {
+          "Ref": "VPC"
+        }
+      }
+    },
+    "LoadBalancer": {
+      "Type": "AWS::ElasticLoadBalancing::LoadBalancer",
+      "Properties": {
+        "HealthCheck": {
+          "Target": "HTTP:6753/",
+          "HealthyThreshold": "3",
+          "UnhealthyThreshold": "4",
+          "Interval": "10",
+          "Timeout": "5"
+        },
+        "LoadBalancerName": "NSolid-Console",
+        "Listeners": [
+          {
+            "InstancePort": 6753,
+            "InstanceProtocol": "HTTP",
+            "LoadBalancerPort": 80,
+            "Protocol": "HTTP"
+          },
+          {
+            "InstancePort": 9001,
+            "InstanceProtocol": "TCP",
+            "LoadBalancerPort": 9001,
+            "Protocol": "TCP"
+          },
+          {
+            "InstancePort": 9002,
+            "InstanceProtocol": "TCP",
+            "LoadBalancerPort": 9002,
+            "Protocol": "TCP"
+          },
+          {
+            "InstancePort": 9003,
+            "InstanceProtocol": "TCP",
+            "LoadBalancerPort": 9003,
+            "Protocol": "TCP"
+          }
+        ],
+        "Scheme": "internet-facing",
+        "SecurityGroups": [
+          {
+            "Ref": "LoadBalancerSecurityGroup"
+          }
+        ],
+        "Subnets": {
+          "Ref": "Subnets"
         }
       }
     },
     "ClusterAutoScalingGroup": {
       "Type": "AWS::AutoScaling::AutoScalingGroup",
+      "DependsOn": "ClusterInstances",
       "Properties": {
         "VPCZoneIdentifier": {
           "Ref": "Subnets"
         },
-        "LaunchConfigurationName": "NSolid-Cluster-Instances",
+        "LaunchConfigurationName": {
+          "Ref": "ClusterInstances"
+        },
         "MinSize": "1",
         "MaxSize": "1",
         "DesiredCapacity": "1"
@@ -229,142 +298,11 @@
               "",
               [
                 "#!/bin/bash -xe\n",
-                "echo ECS_CLUSTER=",
-                {
-                  "Ref": "ClusterName"
-                },
-                " >> /etc/ecs/ecs.config\n"
+                "echo ECS_CLUSTER=\"NSolid-Cluster\">> /etc/ecs/ecs.config\n"
               ]
             ]
           }
         }
-      }
-    },
-    "LoadBalancer": {
-      "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
-      "Properties": {
-        "Name": "NSolid-Console",
-        "Scheme": "internet-facing",
-        "Subnets": {
-          "Ref": "Subnets"
-        },
-        "Type": "network"
-      }
-    },
-    "TargetGroup6753": {
-      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
-      "Properties": {
-        "Name": "nsolid-console-6753",
-        "Port": 6753,
-        "Protocol": "TCP",
-        "VpcId": {
-          "Ref": "VPC"
-        }
-      }
-    },
-    "TargetGroup9001": {
-      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
-      "Properties": {
-        "Name": "nsolid-console-9001",
-        "Port": 9001,
-        "Protocol": "TCP",
-        "VpcId": {
-          "Ref": "VPC"
-        }
-      }
-    },
-    "TargetGroup9002": {
-      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
-      "Properties": {
-        "Name": "nsolid-console-9002",
-        "Port": 9002,
-        "Protocol": "TCP",
-        "VpcId": {
-          "Ref": "VPC"
-        }
-      }
-    },
-    "TargetGroup9003": {
-      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
-      "Properties": {
-        "Name": "nsolid-console-9003",
-        "Port": 9003,
-        "Protocol": "TCP",
-        "VpcId": {
-          "Ref": "VPC"
-        }
-      }
-    },
-    "Listener80": {
-      "Type": "AWS::ElasticLoadBalancingV2::Listener",
-      "Properties": {
-        "DefaultActions": [
-          {
-            "TargetGroupArn": {
-              "Ref": "TargetGroup6753"
-            },
-            "Type": "forward"
-          }
-        ],
-        "LoadBalancerArn": {
-          "Ref": "LoadBalancer"
-        },
-        "Port": 80,
-        "Protocol": "TCP"
-      }
-    },
-    "Listener9001": {
-      "Type": "AWS::ElasticLoadBalancingV2::Listener",
-      "Properties": {
-        "DefaultActions": [
-          {
-            "TargetGroupArn": {
-              "Ref": "TargetGroup9001"
-            },
-            "Type": "forward"
-          }
-        ],
-        "LoadBalancerArn": {
-          "Ref": "LoadBalancer"
-        },
-        "Port": 9001,
-        "Protocol": "TCP"
-      }
-    },
-    "Listener9002": {
-      "Type": "AWS::ElasticLoadBalancingV2::Listener",
-      "Properties": {
-        "DefaultActions": [
-          {
-            "TargetGroupArn": {
-              "Ref": "TargetGroup9002"
-            },
-            "Type": "forward"
-          }
-        ],
-        "LoadBalancerArn": {
-          "Ref": "LoadBalancer"
-        },
-        "Port": 9002,
-        "Protocol": "TCP"
-      }
-    },
-    "Listener9003": {
-      "Type": "AWS::ElasticLoadBalancingV2::Listener",
-      "Properties": {
-        "DefaultActions": [
-          {
-            "TargetGroupArn": {
-              "Ref": "TargetGroup9003"
-            },
-            "Type": "forward"
-          }
-        ],
-        "LoadBalancerArn": {
-          "Ref": "LoadBalancer"
-        },
-        "Port": 9003,
-        "Protocol": "TCP"
       }
     },
     "ConsoleTaskDefinition": {
@@ -383,22 +321,22 @@
             "PortMappings": [
               {
                 "ContainerPort": "6753",
-                "HostPort": "0",
+                "HostPort": "6753",
                 "Protocol": "tcp"
               },
               {
                 "ContainerPort": "9001",
-                "HostPort": "0",
+                "HostPort": "9001",
                 "Protocol": "tcp"
               },
               {
                 "ContainerPort": "9002",
-                "HostPort": "0",
+                "HostPort": "9002",
                 "Protocol": "tcp"
               },
               {
                 "ContainerPort": "9003",
-                "HostPort": "0",
+                "HostPort": "9003",
                 "Protocol": "tcp"
               }
             ]
@@ -408,16 +346,9 @@
     },
     "ConsoleService": {
       "Type": "AWS::ECS::Service",
-      "DependsOn": [
-        "Listener80",
-        "Listener9001",
-        "Listener9002",
-        "Listener9003"
-      ],
+      "DependsOn": "LoadBalancer",
       "Properties": {
-        "Cluster": {
-          "Ref": "ClusterName"
-        },
+        "Cluster": "NSolid-Cluster",
         "DeploymentConfiguration": {
           "MaximumPercent": 200,
           "MinimumHealthyPercent": 100
@@ -427,8 +358,8 @@
           {
             "ContainerName": "nsolid-console",
             "ContainerPort": "6753",
-            "TargetGroupArn": {
-              "Ref": "TargetGroup6753"
+            "LoadBalancerName": {
+              "Ref": "LoadBalancer"
             }
           }
         ],
