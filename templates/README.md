@@ -49,27 +49,6 @@ _Resources Created_
 [![Launch Stack CloudFormation](/images/deploy-to-aws.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=nsolid-console-autoscaling&templateURL=https://s3-us-west-2.amazonaws.com/nodesource-public-cloudformation/nsolid/nsolid-console-ecs-with-cluster.json)
 
 
-## `nsolid-console-nlb`
-
-**Description**
-
-blah blah blah
-
-_Resources Created_
-
-|           Resource            |
-|-------------------------------|
-|         EC2 Instance          |
-|       AutoScaling Group       |
-|      Launch Configuration     |
-|       2 Security Groups       |
-|      Network Load Balancer    |
-
-**Deploy**
-
-[![Launch Stack CloudFormation](/images/deploy-to-aws.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=nsolid-console-autoscaling&templateURL=https://s3-us-west-2.amazonaws.com/nodesource-public-cloudformation/nsolid/nsolid-console-nlb.json)
-
-
 ## `nsolid-console-elb`
 
 **Description**
@@ -91,6 +70,27 @@ _Resources Created_
 [![Launch Stack CloudFormation](/images/deploy-to-aws.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=nsolid-console-autoscaling&templateURL=https://s3-us-west-2.amazonaws.com/nodesource-public-cloudformation/nsolid/nsolid-console-elb.json)
 
 
+## `nsolid-console-nlb`
+
+**Description**
+
+blah blah blah
+
+_Resources Created_
+
+|           Resource            |
+|-------------------------------|
+|         EC2 Instance          |
+|       AutoScaling Group       |
+|      Launch Configuration     |
+|         Security Group        |
+|      Network Load Balancer    |
+
+**Deploy**
+
+[![Launch Stack CloudFormation](/images/deploy-to-aws.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=nsolid-console-autoscaling&templateURL=https://s3-us-west-2.amazonaws.com/nodesource-public-cloudformation/nsolid/nsolid-console-nlb.json)
+
+
 ## `nsolid-console-only`
 
 **Description**
@@ -103,7 +103,7 @@ _Resources Created_
 |-------------------------------|
 |         EC2 Instance          |
 |        Security Group         |
-|    Elastic IP **(optional)**    |
+|    Elastic IP _(optional)_    |
 
 **Deploy**
 
@@ -122,7 +122,7 @@ _Resources Created_
 |-------------------------------|
 |         EC2 Instance          |
 |        Security Group         |
-|    Elastic IP **(optional)**    |
+|    Elastic IP _(optional)_    |
 |       Route53 A Record        |
 
 **Deploy**
