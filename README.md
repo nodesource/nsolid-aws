@@ -8,6 +8,20 @@ N|Solid is a fully-compatible enhanced Node.js platform built for mission-critic
 
 Easily run N|Solid in AWS using our [CloudFormation Templates](templates/). You can find a list of templates and their descriptions in the [templates README.md](/templates/README.md). Once you find a template you want to use, simply click the deploy button:
 
+```
+Steps to use the CloudFormation templates in aws-nsolid
+
+1.) Find the template you want to run in the `/templates` folder, then click the "Deploy to AWS" button
+
+2.) This will open up CloudFormation in your own account. Click the "Next" button
+
+3.) Fill in the required parameters and change the Stack Name if desired. Then click the "Next" button
+
+4.) Adjust any CloudFormation options if desired. Click "Next".
+
+5.) If the template requires IAM capabilities, you will need to check the "I acknowledge that AWS CloudFormation might create IAM resources with custom names." box. Once you are ready, click the "Create" button
+```
+
 [![Launch Stack CloudFormation](/images/deploy-to-aws.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=nsolid-console-autoscaling&templateURL=https://s3-us-west-2.amazonaws.com/nodesource-public-cloudformation/nsolid/nsolid-quick-start.json)
 
 ## AMI List
