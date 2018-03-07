@@ -52,15 +52,15 @@ for console in consoleContent['imageIds']:
             with open("./.AMI-LIST.updated.md", "r") as inFile:
                 lines = inFile.readlines()
             with open("./.AMI-LIST.updated.md", "w") as outFile:
+                correctRegion = False
                 for line in lines:
                     if line.startswith("## " + console['region']):
-                        line = (line + "\n| NSolid Version |   Console AMI  |  Runtime AMI   |"
-                                "\n|----------------|----------------|----------------|"
-                                "\n|   **" + nsolidVersion + "**    "
+                        correctRegion = True
+                    if line.startswith("|----------------|") and correctRegion:
+                        line = (line + "|   **" + nsolidVersion + "**    "
                                 "| `" + console['ami'] + "` "
-                                "| `" + runtime['ami'] + "` |")
-                                
-
+                                "| `" + runtime['ami'] + "` |\n")
+                        correctRegion = False
                     outFile.write(line)
 
 amiFile = open("./.AMI-LIST.updated.md").read()
