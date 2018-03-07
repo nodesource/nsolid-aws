@@ -2,30 +2,30 @@
 
 ## us-east-1
 
-| NSolid Version | Console AMI | Runtime AMI |
-|----------------|-------------|-------------|
-|   **3.0.4**    |  `am-123`   |  `ami-123`  |
+| NSolid Version |   Console AMI  |  Runtime AMI   |
+|----------------|----------------|----------------|
+|   **3.0.5**    | `ami-123abc` | `ami-123abc` |
 
 
 ## us-east-2
 
-| NSolid Version | Console AMI | Runtime AMI |
-|----------------|-------------|-------------|
-|   **3.0.4**    |  `am-123`   |  `ami-123`  |
+| NSolid Version |   Console AMI  |  Runtime AMI   |
+|----------------|----------------|----------------|
+|   **3.0.5**    | `ami-123abc` | `ami-123abc` |
 
 
 ## us-west-1
 
-| NSolid Version | Console AMI | Runtime AMI |
-|----------------|-------------|-------------|
-|   **3.0.4**    |  `am-123`   |  `ami-123`  |
+| NSolid Version |   Console AMI  |  Runtime AMI   |
+|----------------|----------------|----------------|
+|   **3.0.5**    | `ami-123abc` | `ami-123abc` |
 
 
 ## us-west-2
 
-| NSolid Version | Console AMI | Runtime AMI |
-|----------------|-------------|-------------|
-|   **3.0.4**    |  `am-123`   |  `ami-123`  |
+| NSolid Version |   Console AMI  |  Runtime AMI   |
+|----------------|----------------|----------------|
+|   **3.0.5**    | `ami-123ababc` | `ami-12ab3abc` |
 
 
 ## ca-central-1
