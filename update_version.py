@@ -10,6 +10,7 @@ consoleFile = raw_input("N|Solid Console File (full path):\n")
 runtimeFile = raw_input("N|Solid Runtime File (full path):\n")
 consoleContent = json.loads(open(consoleFile).read())
 runtimeContent = json.loads(open(runtimeFile).read())
+print("\n")
 
 # AMI-LIST.md update
 if "**" + nsolidVersion + "**" in open('AMI-LIST.md').read():
@@ -71,8 +72,10 @@ for newConsole in consoleContent['imageIds']:
                     with open("./templates/" + template, "w") as outFile:
                         for line in lines:
                             if oldConsole['ami'] in line:
-                                line.replace(oldConsole['ami'], newConsole['ami'])
-                            outFile.write(line)
+                                updatedLine = line.replace(oldConsole['ami'], newConsole['ami'])
+                                outFile.write(updatedLine)
+                            else:
+                                outFile.write(line)
 
 # Runtime Update
 for newRuntime in runtimeContent['imageIds']:
@@ -86,7 +89,9 @@ for newRuntime in runtimeContent['imageIds']:
                     with open("./templates/" + template, "w") as outFile:
                         for line in lines:
                             if oldRuntime['ami'] in line:
-                                line.replace(oldRuntime['ami'], newRuntime['ami'])
-                            outFile.write(line)
+                                updatedLine = line.replace(oldRuntime['ami'], newRuntime['ami'])
+                                outFile.write(updatedLine)
+                            else:
+                                outFile.write(line)
 
 print('Update Complete.')
