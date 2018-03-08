@@ -24,6 +24,25 @@ else:
 for console in consoleContent['imageIds']:
     for runtime in runtimeContent['imageIds']:
         if console['region'] == runtime['region']:
+            # Make AMIs public
+            ec2 = boto3.client('ec2', region_name=console['region'])
+            ec2.modify_image_attribute(
+                Attribute='launchPermission',
+                ImageId=console['ami'],
+                OperationType='add',
+                UserGroups=[
+                    'all'
+                ]
+            )
+            ec2.modify_image_attribute(
+                Attribute='launchPermission',
+                ImageId=runtime['ami'],
+                OperationType='add',
+                UserGroups=[
+                    'all'
+                ]
+            )
+            # Update File
             with open("./.AMI-LIST.updated.md", "r") as inFile:
                 lines = inFile.readlines()
             with open("./.AMI-LIST.updated.md", "w") as outFile:
