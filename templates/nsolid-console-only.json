@@ -3,38 +3,50 @@
   "Description": "N|Solid Console in AWS",
   "Mappings": {
     "ConsoleAMI": {
-      "ap-northeast-1": {
-        "AMI": "ami-58ef533e"
-      },
-      "ap-southeast-1": {
-        "AMI": "ami-2e98ce4d"
-      },
-      "ap-southeast-2": {
-        "AMI": "ami-4dc42e2f"
-      },
-      "ca-central-1": {
-        "AMI": "ami-a8843fcc"
-      },
-      "eu-central-1": {
-        "AMI": "ami-95098bfa"
-      },
-      "eu-west-1": {
-        "AMI": "ami-dfcd7ba6"
-      },
-      "eu-west-2": {
-        "AMI": "ami-f0e9f694"
-      },
       "us-east-1": {
-        "AMI": "ami-2fb02555"
+        "AMI": "ami-55cd3428"
       },
       "us-east-2": {
-        "AMI": "ami-d4ddf3b1"
+        "AMI": "ami-cf5066aa"
       },
       "us-west-1": {
-        "AMI": "ami-e0ab9380"
+        "AMI": "ami-98796cf8"
       },
       "us-west-2": {
-        "AMI": "ami-0eda0676"
+        "AMI": "ami-9ee671e6"
+      },
+      "ca-central-1": {
+        "AMI": "ami-265cdb42"
+      },
+      "eu-central-1": {
+        "AMI": "ami-d5ec82ba"
+      },
+      "eu-west-1": {
+        "AMI": "ami-c6d89abf"
+      },
+      "eu-west-2": {
+        "AMI": "ami-b0ce29d7"
+      },
+      "eu-west-3": {
+        "AMI": "ami-ae56e0d3"
+      },
+      "ap-northeast-1": {
+        "AMI": "ami-52317e34"
+      },
+      "ap-northeast-2": {
+        "AMI": "ami-aeeb47c0"
+      },
+      "ap-southeast-1": {
+        "AMI": "ami-b33a6dcf"
+      },
+      "ap-southeast-2": {
+        "AMI": "ami-a7bd7dc5"
+      },
+      "ap-south-1": {
+        "AMI": "ami-30a1ff5f"
+      },
+      "sa-east-1": {
+        "AMI": "ami-73541e1f"
       }
     }
   },
