@@ -46,9 +46,9 @@ os.remove("./.AMI-LIST.updated.md")
 s3 = boto3.client('s3')
 consoleContents = s3.list_objects_v2(Bucket="ns-cloud-artifacts", MaxKeys=1, Prefix="nsolid/nsolid-console")
 runtimeContents = s3.list_objects_v2(Bucket="ns-cloud-artifacts", MaxKeys=1, Prefix="nsolid/nsolid-runtime")
-consolePreviousKey = consoleContents['Content'][0]['Key']
-consolePreviousKey = runtimeContents['Content'][0]['Key']
-cosnoleObj = s3.get_object(Bucket="ns-cloud-artifacts", Key=consolePreviousKey)
+consolePreviousKey = consoleContents['Contents'][0]['Key']
+runtimePreviousKey = runtimeContents['Contents'][0]['Key']
+consoleObj = s3.get_object(Bucket="ns-cloud-artifacts", Key=consolePreviousKey)
 runtimeObj = s3.get_object(Bucket="ns-cloud-artifacts", Key=runtimePreviousKey)
 consoleBody = consoleObj['Body'].read()
 runtimeBody = runtimeObj['Body'].read()
