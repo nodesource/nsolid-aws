@@ -2,25 +2,25 @@
 
 # N|Solid on AWS
 
-N|Solid is a fully-compatible enhanced Node.js platform built for mission-critical applications. N|Solid enables organizations to build, manage, secure, and analyze Node.js applications.
+[Amazon Web Services](https://aws.amazon.com/) (AWS) offers reliable, scalable, and inexpensive cloud computing services. Deploy your [N|Solid](https://nodesource.com/products/nsolid) instances to the AWS cloud for cloud access to the only Node.js platform built for mission-critical applications.
 
 ## Getting Started
 
-Easily run N|Solid in AWS using our [CloudFormation Templates](templates/). You can find a list of templates and their descriptions in the [templates README.md](/templates/README.md). Once you find a template you want to use, simply click the deploy button:
+Easily run N|Solid in AWS using our [CloudFormation Templates](templates/). You can find a list of templates and their descriptions in the templates [README.md](/templates/README.md). Once you find a template you want to use, simply click the deploy button.
 
-```
-Steps to use the CloudFormation templates in aws-nsolid
+If you don't already have an N|Solid license key, start a [free trial](https://pages.nodesource.com/nsolid-free-trial.html). To retrieve an existing license key, follow [the docs](https://docs.nodesource.com/nsolid/3.0/docs#setting-up-the-nsolid-console) for step-by-step instructions. 
 
-1.) Find the template you want to run in the `/templates` folder, then click the "Deploy to AWS" button
+Follow these steps to use the [CloudFormation](https://aws.amazon.com/cloudformation/) templates in `aws-nsolid`:
 
-2.) This will open up CloudFormation in your own account. Click the "Next" button
+1. Find the template you want to run in the `/templates` folder, then click the **Deploy to AWS** button.
 
-3.) Fill in the required parameters and change the Stack Name if desired. Then click the "Next" button
+2. This will open up CloudFormation in your own account. Click the **Next** button.
 
-4.) Adjust any CloudFormation options if desired. Click "Next".
+3. Fill in the required parameters and change the `Stack Name` if desired. Then click the **Next** button.
 
-5.) If the template requires IAM capabilities, you will need to check the "I acknowledge that AWS CloudFormation might create IAM resources with custom names." box. Once you are ready, click the "Create" button
-```
+4. Adjust any CloudFormation options if desired. Click **Next**.
+
+5. If the template requires IAM capabilities, you will need to check the "I acknowledge that AWS CloudFormation might create IAM resources with custom names." box. Once you are ready, click the **Create** button.
 
 [![Launch Stack CloudFormation](/images/deploy-to-aws.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=nsolid-console-autoscaling&templateURL=https://s3-us-west-2.amazonaws.com/nodesource-public-cloudformation/nsolid/nsolid-quick-start.json)
 
