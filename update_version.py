@@ -10,7 +10,7 @@ consoleFile = raw_input("N|Solid Console File (full path):\n")
 runtimeFile = raw_input("N|Solid Runtime File (full path):\n")
 consoleContent = json.loads(open(consoleFile).read())
 runtimeContent = json.loads(open(runtimeFile).read())
-print("\n")
+print("\nRunning...\n")
 
 # AMI-LIST.md update
 if "**" + nsolidVersion + "**" in open('AMI-LIST.md').read():
@@ -64,10 +64,42 @@ os.remove("./.AMI-LIST.updated.md")
 
 # AMI Maps update
 s3 = boto3.client('s3')
-consoleContents = s3.list_objects_v2(Bucket="ns-cloud-artifacts", MaxKeys=1, Prefix="nsolid/nsolid-console")
-runtimeContents = s3.list_objects_v2(Bucket="ns-cloud-artifacts", MaxKeys=1, Prefix="nsolid/nsolid-runtime")
-consolePreviousKey = consoleContents['Contents'][0]['Key']
-runtimePreviousKey = runtimeContents['Contents'][0]['Key']
+consoleContents = s3.list_objects_v2(Bucket="ns-cloud-artifacts", Prefix="nsolid/nsolid-console")
+runtimeContents = s3.list_objects_v2(Bucket="ns-cloud-artifacts", Prefix="nsolid/nsolid-runtime")
+consoleKeys = []
+runtimeKeys = []
+for c in consoleContents['Contents']:
+    consoleKeys.append({"date": c['LastModified'].strftime('%s'),"key": c['Key']})
+for r in runtimeContents['Contents']:
+    runtimeKeys.append({"date": r['LastModified'].strftime('%s'),"key": r['Key']})
+consoleKeys = sorted(consoleKeys, key=lambda x: x['date'], reverse=True)
+runtimeKeys = sorted(runtimeKeys, key=lambda x: x['date'], reverse=True)
+consolePreviousKey = consoleKeys[0]['key']
+runtimePreviousKey = runtimeKeys[0]['key']
+if consolePreviousKey == 'nsolid/nsolid-console-' + nsolidVersion.replace('.', '') + '.json':
+    print('deleting Console')
+    s3.delete_object(
+        Bucket='ns-cloud-artifacts',
+        Key=consolePreviousKey
+    )
+    consoleContents = s3.list_objects_v2(Bucket="ns-cloud-artifacts", Prefix="nsolid/nsolid-console")
+    consoleKeys = []
+    for c in consoleContents['Contents']:
+        consoleKeys.append({"date": c['LastModified'].strftime('%s'),"key": c['Key']})
+    consoleKeys = sorted(consoleKeys, key=lambda x: x['date'], reverse=True)
+    consolePreviousKey = consoleKeys[0]['key']
+if runtimePreviousKey == 'nsolid/nsolid-runtime-' + nsolidVersion.replace('.', '') + '.json':
+    print('deleting Runtime')
+    s3.delete_object(
+        Bucket='ns-cloud-artifacts',
+        Key=runtimePreviousKey
+    )
+    runtimeContents = s3.list_objects_v2(Bucket="ns-cloud-artifacts", Prefix="nsolid/nsolid-runtime")
+    runtimeKeys = []
+    for r in runtimeContents['Contents']:
+        runtimeKeys.append({"date": r['LastModified'].strftime('%s'),"key": r['Key']})
+    runtimeKeys = sorted(runtimeKeys, key=lambda x: x['date'], reverse=True)
+    runtimePreviousKey = runtimeKeys[0]['key']
 consoleObj = s3.get_object(Bucket="ns-cloud-artifacts", Key=consolePreviousKey)
 runtimeObj = s3.get_object(Bucket="ns-cloud-artifacts", Key=runtimePreviousKey)
 consoleBody = consoleObj['Body'].read()
