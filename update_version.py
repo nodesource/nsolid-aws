@@ -77,7 +77,6 @@ runtimeKeys = sorted(runtimeKeys, key=lambda x: x['date'], reverse=True)
 consolePreviousKey = consoleKeys[0]['key']
 runtimePreviousKey = runtimeKeys[0]['key']
 if consolePreviousKey == 'nsolid/nsolid-console-' + nsolidVersion.replace('.', '') + '.json':
-    print('deleting Console')
     s3.delete_object(
         Bucket='ns-cloud-artifacts',
         Key=consolePreviousKey
@@ -89,7 +88,6 @@ if consolePreviousKey == 'nsolid/nsolid-console-' + nsolidVersion.replace('.', '
     consoleKeys = sorted(consoleKeys, key=lambda x: x['date'], reverse=True)
     consolePreviousKey = consoleKeys[0]['key']
 if runtimePreviousKey == 'nsolid/nsolid-runtime-' + nsolidVersion.replace('.', '') + '.json':
-    print('deleting Runtime')
     s3.delete_object(
         Bucket='ns-cloud-artifacts',
         Key=runtimePreviousKey

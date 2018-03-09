@@ -4,49 +4,49 @@
   "Mappings": {
     "RuntimeAMI": {
       "us-east-1": {
-        "AMI": "ami-e00af29d"
+        "AMI": "ami-b909f1c4"
       },
       "us-east-2": {
-        "AMI": "ami-5a45733f"
+        "AMI": "ami-1943757c"
       },
       "us-west-1": {
-        "AMI": "ami-421e0b22"
+        "AMI": "ami-b1190cd1"
       },
       "us-west-2": {
-        "AMI": "ami-324fd84a"
+        "AMI": "ami-2f4ed957"
       },
       "ca-central-1": {
-        "AMI": "ami-d35cdbb7"
+        "AMI": "ami-8f58dfeb"
       },
       "eu-central-1": {
-        "AMI": "ami-1ed2bc71"
+        "AMI": "ami-f2d1bf9d"
       },
       "eu-west-1": {
-        "AMI": "ami-da632ea3"
+        "AMI": "ami-90632ee9"
       },
       "eu-west-2": {
-        "AMI": "ami-f1df3896"
+        "AMI": "ami-ffdf3898"
       },
       "eu-west-3": {
-        "AMI": "ami-7868de05"
+        "AMI": "ami-7850e605"
       },
       "ap-northeast-1": {
-        "AMI": "ami-4be7a82d"
+        "AMI": "ami-7ee1ae18"
       },
       "ap-northeast-2": {
-        "AMI": "ami-00fe526e"
+        "AMI": "ami-b5ff53db"
       },
       "ap-southeast-1": {
-        "AMI": "ami-cc9ec9b0"
+        "AMI": "ami-109dca6c"
       },
       "ap-southeast-2": {
-        "AMI": "ami-ccea2aae"
+        "AMI": "ami-d0ea2ab2"
       },
       "ap-south-1": {
-        "AMI": "ami-7ec19f11"
+        "AMI": "ami-48ffa127"
       },
       "sa-east-1": {
-        "AMI": "ami-437c362f"
+        "AMI": "ami-b27f35de"
       }
     }
   },
