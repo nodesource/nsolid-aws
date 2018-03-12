@@ -20,7 +20,7 @@ Follow these steps to use the [CloudFormation](https://aws.amazon.com/cloudforma
 
 5. If the template requires IAM capabilities, you will need to check the "I acknowledge that AWS CloudFormation might create IAM resources with custom names." box. Once you are ready, click the **Create** button.
 
-[![Launch Stack CloudFormation](/images/deploy-to-aws.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=nsolid-console-autoscaling&templateURL=https://s3-us-west-2.amazonaws.com/nodesource-public-cloudformation/nsolid/nsolid-quick-start.json)
+[![Launch Stack CloudFormation](/images/deploy-to-aws.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=nsolid-quick-start&templateURL=https://s3-us-west-2.amazonaws.com/nodesource-public-cloudformation/nsolid/nsolid-quick-start.json)
 
 ## AMI List
 
