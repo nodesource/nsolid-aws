@@ -222,7 +222,7 @@
             "Ref": "ConsoleSecurityGroup"
           }
         ],
-        "InstanceType": "m3.xlarge",
+        "InstanceType": "m5.large",
         "KeyName": {
           "Ref": "SSHKey"
         }
