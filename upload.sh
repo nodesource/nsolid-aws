@@ -19,5 +19,5 @@ echo "Templates are valid. Uploading..."
 echo ""
 
 BUCKET="nodesource-public-cloudformation"
-aws s3 sync ./templates s3://$BUCKET/nsolid/
+aws s3 sync ./templates s3://$BUCKET/nsolid/ --acl "public-read"
 echo "Templates Updated"
