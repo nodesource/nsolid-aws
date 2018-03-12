@@ -2,13 +2,11 @@
 
 # N|Solid on AWS
 
-[Amazon Web Services](https://aws.amazon.com/) (AWS) offers reliable, scalable, and inexpensive cloud computing services. Deploy your [N|Solid](https://nodesource.com/products/nsolid) instances to the AWS cloud for cloud access to the only Node.js platform built for mission-critical applications.
+[Amazon Web Services](https://aws.amazon.com/) (AWS) offers reliable, scalable, and inexpensive cloud computing services. Deploy your [N|Solid](https://nodesource.com/products/nsolid) instances to AWS for cloud access to the only Node.js platform built for mission-critical applications.
 
 ## Getting Started
 
 Easily run N|Solid in AWS using our [CloudFormation Templates](templates/). You can find a list of templates and their descriptions in the templates [README.md](/templates/README.md). Once you find a template you want to use, simply click the deploy button.
-
-If you don't already have an N|Solid license key, start a [free trial](https://pages.nodesource.com/nsolid-free-trial.html). To retrieve an existing license key, follow [the docs](https://docs.nodesource.com/nsolid/3.0/docs#setting-up-the-nsolid-console) for step-by-step instructions. 
 
 Follow these steps to use the [CloudFormation](https://aws.amazon.com/cloudformation/) templates in `aws-nsolid`:
 
