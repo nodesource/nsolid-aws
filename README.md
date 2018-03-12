@@ -6,7 +6,7 @@
 
 ## Getting Started
 
-Easily run N|Solid in AWS using our [CloudFormation Templates](templates/). You can find a list of templates and their descriptions in the templates [README.md](/templates/README.md). Once you find a template you want to use, simply click the deploy button.
+Easily run N|Solid in AWS using our [CloudFormation Templates](templates/). You can find a list of templates and their descriptions in the template's [README.md](/templates/README.md). Once you find a template you want to use, simply click the deploy button.
 
 Follow these steps to use the [CloudFormation](https://aws.amazon.com/cloudformation/) templates in `aws-nsolid`:
 
