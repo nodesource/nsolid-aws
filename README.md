@@ -9,13 +9,9 @@ If you don't already have a license key, please visit the NodeSource website to 
 
 ## Getting Started with N|Solid on AWS
 
-Easily run N|Solid in AWS using our [CloudFormation](https://aws.amazon.com/cloudformation/) templates. You can find a list of templates and their descriptions in the [README.md](/templates/README.md). 
+Easily run N|Solid in AWS using our [CloudFormation](https://aws.amazon.com/cloudformation/) templates. You can find a list of templates and their descriptions in the [README.md](/templates/README.md).
 
-<<<<<<< HEAD
-Follow these steps to use the CloudFormation templates in `aws-nsolid`:
-=======
 Follow these steps to use the [CloudFormation](https://aws.amazon.com/cloudformation/) templates in `nsolid-aws`:
->>>>>>> Update repo name
 
 1. Find the template you want to run in the `/templates` folder, then click the **Deploy to AWS** button.
 

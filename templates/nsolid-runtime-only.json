@@ -124,7 +124,7 @@
             "AMI"
           ]
         },
-        "InstanceType": "m5.large",
+        "InstanceType": "m3.large",
         "KeyName": {
           "Ref": "SSHKey"
         },

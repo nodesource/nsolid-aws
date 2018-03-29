@@ -2,6 +2,32 @@
 
 _These templates are provided as a way of getting started. Before using them in production please make the necessary security updates._
 
+
+## `nsolid-quick-start`
+
+### Description
+
+Runs N|Solid Console and N|Solid Runtime on separate EC2 Instances. The EC2 Instances are configured with a Security Group that allows traffic from `0.0.0.0/0` on ports `22`, `80`, `9001`, `9002`, `9003`. Both of the EC2 Instances get Elastic IP addresses. After the stack is created, the Outputs tab will have the IP address of both instances. Simply load the N|Solid Console IP address in your browser to view the console. In your N|Solid Runtime, set the `NSOLID_COMMAND` variable to the N|Solid Console IP address to send data from your processes.
+
+|      Required Parameter      |                    Description                |
+|---------------------|---------------------------------------------------------|
+|       `SSHKey`        |                Amazon EC2 Key Pair                      |
+|     `ConsoleSubnet`   |         Subnet ID to run NSolid Console in              |  
+|      `ConsoleVPC`     |          VPC ID to run NSolid Console in                |
+|     `RuntimeSubnet`   |         Subnet ID to run NSolid Runtime in              |  
+|      `RuntimeVPC`     |          VPC ID to run NSolid Runtime in                |
+
+|       Resources Created       |
+|-------------------------------|
+|        2 EC2 Instances        |
+|       2 Security Groups       |
+|         2 Elastic IPs         |
+
+### Deploy
+
+[![Launch Stack CloudFormation](/images/deploy-to-aws.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=nsolid-quick-start&templateURL=https://s3-us-west-2.amazonaws.com/nodesource-public-cloudformation/nsolid/nsolid-quick-start.json)
+
+
 ## `nsolid-console-ecs`
 
 ### Description
@@ -163,30 +189,6 @@ Runs N|Solid Console on an EC2 Instance. The EC2 Instance is configured with a S
 ### Deploy
 
 [![Launch Stack CloudFormation](/images/deploy-to-aws.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=nsolid-console-route53&templateURL=https://s3-us-west-2.amazonaws.com/nodesource-public-cloudformation/nsolid/nsolid-console-route53.json)
-
-## `nsolid-quick-start`
-
-### Description
-
-Runs N|Solid Console and N|Solid Runtime on separate EC2 Instances. The EC2 Instances are configured with a Security Group that allows traffic from `0.0.0.0/0` on ports `22`, `80`, `9001`, `9002`, `9003`. Both of the EC2 Instances get Elastic IP addresses. After the stack is created, the Outputs tab will have the IP address of both instances. Simply load the N|Solid Console IP address in your browser to view the console. In your N|Solid Runtime, set the `NSOLID_COMMAND` variable to the N|Solid Console IP address to send data from your processes.
-
-|      Required Parameter      |                    Description                |
-|---------------------|---------------------------------------------------------|
-|       `SSHKey`        |                Amazon EC2 Key Pair                      |
-|     `ConsoleSubnet`   |         Subnet ID to run NSolid Console in              |  
-|      `ConsoleVPC`     |          VPC ID to run NSolid Console in                |
-|     `RuntimeSubnet`   |         Subnet ID to run NSolid Runtime in              |  
-|      `RuntimeVPC`     |          VPC ID to run NSolid Runtime in                |
-
-|       Resources Created       |
-|-------------------------------|
-|        2 EC2 Instances        |
-|       2 Security Groups       |
-|         2 Elastic IPs         |
-
-### Deploy
-
-[![Launch Stack CloudFormation](/images/deploy-to-aws.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=nsolid-quick-start&templateURL=https://s3-us-west-2.amazonaws.com/nodesource-public-cloudformation/nsolid/nsolid-quick-start.json)
 
 
 ## `nsolid-runtime-only`
