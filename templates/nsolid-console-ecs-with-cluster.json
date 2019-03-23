@@ -371,7 +371,7 @@
             "Ref": "HostSecurityGroup"
           }
         ],
-        "InstanceType": "m3.large",
+        "InstanceType": "m5.large",
         "KeyName": {
           "Ref": "SSHKey"
         },
