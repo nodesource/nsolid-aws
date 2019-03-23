@@ -57,7 +57,7 @@
         "Disabled"
       ],
       "ConstraintDescription": "Must be either Enabled or Disabled",
-      "Description": "If Enabled, the Console instance will get an Elastic IP",
+      "Description": "If Enabled, the Runtime instance will get an Elastic IP",
       "Default": "Disabled",
       "Type": "String"
     },
