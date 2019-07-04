@@ -4,6 +4,7 @@
 
 | NSolid Version |  Console AMI   |   Runtime AMI  |
 |----------------|----------------|----------------|
+|   **3.4.9**    | `ami-03390ad74abe11aae` | `ami-010d6d17e6bae45c9` |
 |   **3.4.7**    | `ami-0db5ac388a68c69ef` | `ami-093f226f3277b40a8` |
 |   **3.4.6**    | `ami-03872bd1940101e19` | `ami-08ca1fa25cbad6bbe` |
 |   **3.4.5**    | `ami-09695df8b8240eef4` | `ami-0a8c371e8fa7488c3` |
@@ -31,6 +32,7 @@
 
 | NSolid Version |  Console AMI   |   Runtime AMI  |
 |----------------|----------------|----------------|
+|   **3.4.9**    | `ami-04f76453201523bee` | `ami-0dda84174ab0ac02a` |
 |   **3.4.7**    | `ami-03d570f6cfc6ff68e` | `ami-0019cdbdfb8f5e2be` |
 |   **3.4.6**    | `ami-0c8aa1537a3d62f71` | `ami-0dde5e796ac8b773c` |
 |   **3.4.5**    | `ami-06bc7380bb364a56c` | `ami-02349548f0a1dceae` |
@@ -59,6 +61,7 @@
 
 | NSolid Version |  Console AMI   |   Runtime AMI  |
 |----------------|----------------|----------------|
+|   **3.4.9**    | `ami-0cd08f2e66995ac76` | `ami-07ba4f6764e799a1f` |
 |   **3.4.7**    | `ami-030b82323056d166e` | `ami-0fffe0cd12981b268` |
 |   **3.4.6**    | `ami-0b2f5cc97176ca35e` | `ami-07eb1c7269b835577` |
 |   **3.4.5**    | `ami-06d4eedda36e77f11` | `ami-0af9c7ff239c61932` |
@@ -87,6 +90,7 @@
 
 | NSolid Version |  Console AMI   |   Runtime AMI  |
 |----------------|----------------|----------------|
+|   **3.4.9**    | `ami-08d2c57de13a9983e` | `ami-097980221e5cac9b0` |
 |   **3.4.7**    | `ami-0a61debc84793b609` | `ami-086a5d00182a09ec7` |
 |   **3.4.6**    | `ami-0be06f702f7a5756d` | `ami-05c74ca23b91d7e00` |
 |   **3.4.5**    | `ami-078610576b6903521` | `ami-0274a77bb6e6a1532` |
@@ -115,6 +119,7 @@
 
 | NSolid Version |  Console AMI   |   Runtime AMI  |
 |----------------|----------------|----------------|
+|   **3.4.9**    | `ami-047cc6fa235146d57` | `ami-070055b24c4960914` |
 |   **3.4.7**    | `ami-089ac37063840f048` | `ami-0f529331008ace9e0` |
 |   **3.4.6**    | `ami-08a51ba412e6d189c` | `ami-0cc0d7e155bdcc7b8` |
 |   **3.4.5**    | `ami-0e8d2639380ae6d3b` | `ami-06c27884da9c790fc` |
@@ -143,6 +148,7 @@
 
 | NSolid Version |  Console AMI   |   Runtime AMI  |
 |----------------|----------------|----------------|
+|   **3.4.9**    | `ami-0967ea83718e7ebee` | `ami-0ce12394d1a7de98b` |
 |   **3.4.7**    | `ami-08d124b888b866d9c` | `ami-0530cf90749674885` |
 |   **3.4.6**    | `ami-0633ab6ba86aa01c2` | `ami-072bcfc19ccfeab64` |
 |   **3.4.5**    | `ami-06342d593b2b599f1` | `ami-000c969b2acbece26` |
@@ -171,6 +177,7 @@
 
 | NSolid Version |  Console AMI   |   Runtime AMI  |
 |----------------|----------------|----------------|
+|   **3.4.9**    | `ami-0d74b5a35b7e3b5a8` | `ami-086731eb1dff7e6bf` |
 |   **3.4.7**    | `ami-0e7406dd7aa2c206f` | `ami-0ae30ea06c6978623` |
 |   **3.4.6**    | `ami-0808a061fa04b9106` | `ami-0f0c1d93aa5f4313c` |
 |   **3.4.5**    | `ami-004670ea1848fa12c` | `ami-0dfc4828778c79f65` |
@@ -199,6 +206,7 @@
 
 | NSolid Version |  Console AMI   |   Runtime AMI  |
 |----------------|----------------|----------------|
+|   **3.4.9**    | `ami-052aaa6f909c69b6b` | `ami-04a58fa92ef9f26a4` |
 |   **3.4.7**    | `ami-05f4a13705234e4a7` | `ami-01a2903bae70c3857` |
 |   **3.4.6**    | `ami-054b6e1a4b36fa98f` | `ami-00c9a36c0e3cf8aaf` |
 |   **3.4.5**    | `ami-0b5a266f07a533f57` | `ami-055a3c2e4ab1962a4` |
@@ -227,6 +235,7 @@
 
 | NSolid Version |  Console AMI   |   Runtime AMI  |
 |----------------|----------------|----------------|
+|   **3.4.9**    | `ami-0f9bc0d18b94064df` | `ami-098516717cf5cf91f` |
 |   **3.4.7**    | `ami-08d7ede7acd90b84c` | `ami-0a8572145810ef2ab` |
 |   **3.4.6**    | `ami-0fb4746727ed20a7b` | `ami-08afc41288dc94588` |
 |   **3.4.5**    | `ami-08155a1e943485b52` | `ami-044e8fca9df1231f2` |
@@ -255,6 +264,7 @@
 
 | NSolid Version |  Console AMI   |   Runtime AMI  |
 |----------------|----------------|----------------|
+|   **3.4.9**    | `ami-023bb37de2bf1eadb` | `ami-05003535216e923af` |
 |   **3.4.7**    | `ami-0f86cdd38ad02ad22` | `ami-0ccbc4423d728a345` |
 |   **3.4.6**    | `ami-0936f9fa0176b80fd` | `ami-0e4fa0caa0fde5d0f` |
 |   **3.4.5**    | `ami-040e28395d58bda09` | `ami-06a1f1b556bca4f14` |
@@ -283,6 +293,7 @@
 
 | NSolid Version |  Console AMI   |   Runtime AMI  |
 |----------------|----------------|----------------|
+|   **3.4.9**    | `ami-0e3ef67fb8b6a4f9a` | `ami-0a3dcde6cf16d0000` |
 |   **3.4.7**    | `ami-08882ae452c622f1c` | `ami-069f94c2024e6df0d` |
 |   **3.4.6**    | `ami-0943daae63695e1a4` | `ami-0635da7876a55896c` |
 |   **3.4.5**    | `ami-0089841f9908e02f9` | `ami-05f2bf07dd3bfd83c` |
@@ -311,6 +322,7 @@
 
 | NSolid Version |  Console AMI   |   Runtime AMI  |
 |----------------|----------------|----------------|
+|   **3.4.9**    | `ami-027fcb044f3a17dab` | `ami-03c76e52f081e71ba` |
 |   **3.4.7**    | `ami-06446af5f1e352ad5` | `ami-069427935b9fb5c23` |
 |   **3.4.6**    | `ami-014b9161815b4738c` | `ami-027785ca9a3a79b9e` |
 |   **3.4.5**    | `ami-04d8af78fcc81fdc6` | `ami-0e511831b98047156` |
@@ -339,6 +351,7 @@
 
 | NSolid Version |  Console AMI   |   Runtime AMI  |
 |----------------|----------------|----------------|
+|   **3.4.9**    | `ami-06fc9ce610ebaa19e` | `ami-0a6cec96fd6915e06` |
 |   **3.4.7**    | `ami-074f01aebd1f46b69` | `ami-0bcb6bc5b55bb07ac` |
 |   **3.4.6**    | `ami-0193e0a4e654ab7f1` | `ami-05709be026eb33a27` |
 |   **3.4.5**    | `ami-0367b164c8669635b` | `ami-0838b5d4ecdef0918` |
@@ -367,6 +380,7 @@
 
 | NSolid Version |  Console AMI   |   Runtime AMI  |
 |----------------|----------------|----------------|
+|   **3.4.9**    | `ami-0fec0ea7f45685fb7` | `ami-0e14fec2337939495` |
 |   **3.4.7**    | `ami-0390cf8ef6d640068` | `ami-04979d568cae6b3db` |
 |   **3.4.6**    | `ami-00c281fc96e121184` | `ami-0961990503c1eeb34` |
 |   **3.4.5**    | `ami-043d48f55d65abab9` | `ami-058d1445d5b659515` |
@@ -395,6 +409,7 @@
 
 | NSolid Version |  Console AMI   |   Runtime AMI  |
 |----------------|----------------|----------------|
+|   **3.4.9**    | `ami-0be10ac7c12337cdb` | `ami-05d996514e9391768` |
 |   **3.4.7**    | `ami-0565455509251b026` | `ami-05886416582d099c1` |
 |   **3.4.6**    | `ami-0bb4d1e41561c710a` | `ami-078783f420ae7d84e` |
 |   **3.4.5**    | `ami-0d1fc4e655dfed4f1` | `ami-0e67ab106604f4499` |
