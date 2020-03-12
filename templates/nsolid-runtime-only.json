@@ -4,49 +4,49 @@
   "Mappings": {
     "RuntimeAMI": {
       "us-east-1": {
-        "AMI": "ami-07e787fc4c21b8504"
+        "AMI": "ami-057da947f4ad33f06"
       },
       "us-east-2": {
-        "AMI": "ami-0a60cb18e519c7aa7"
+        "AMI": "ami-0860c2793152f2e6d"
       },
       "us-west-1": {
-        "AMI": "ami-07a34706e2c113e83"
+        "AMI": "ami-0bf53f672714028fc"
       },
       "us-west-2": {
-        "AMI": "ami-0fa25834de97896d6"
+        "AMI": "ami-079392d8a6be17e97"
       },
       "ca-central-1": {
-        "AMI": "ami-01d506b931f554a5e"
+        "AMI": "ami-0b54df3f52c621560"
       },
       "eu-central-1": {
-        "AMI": "ami-0a410b3506f7ab08c"
+        "AMI": "ami-06031ef41cd0c1284"
       },
       "eu-west-1": {
-        "AMI": "ami-05ee2fa9f36567d97"
+        "AMI": "ami-09f5c6a32eff48759"
       },
       "eu-west-2": {
-        "AMI": "ami-0a3666faf80318677"
+        "AMI": "ami-0fd310b7dd2b2a3ac"
       },
       "eu-west-3": {
-        "AMI": "ami-028df5d6da70631a4"
+        "AMI": "ami-0b32ccfb235e0ed3a"
       },
       "ap-northeast-1": {
-        "AMI": "ami-037400b331afae179"
+        "AMI": "ami-0876fe39d7faf4b85"
       },
       "ap-northeast-2": {
-        "AMI": "ami-0fac6b45e8ec3e94b"
+        "AMI": "ami-07e1a652a600312f9"
       },
       "ap-southeast-1": {
-        "AMI": "ami-013bcca3a45fed21b"
+        "AMI": "ami-02f857e0f662b70e6"
       },
       "ap-southeast-2": {
-        "AMI": "ami-06e0ef07697a0b176"
+        "AMI": "ami-0cbfca76b001089d0"
       },
       "ap-south-1": {
-        "AMI": "ami-0d2880caeb9cf6bec"
+        "AMI": "ami-0e12b505043c8c986"
       },
       "sa-east-1": {
-        "AMI": "ami-0bdc27f8026fcc59e"
+        "AMI": "ami-06b3c6aa49ffdd241"
       }
     }
   },
