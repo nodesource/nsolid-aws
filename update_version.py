@@ -5,9 +5,9 @@ import os
 import boto3
 s3 = boto3.client('s3')
 
-nsolidVersion = raw_input("N|Solid Version:\n")
-consoleFile = raw_input("N|Solid Console File (full path):\n")
-runtimeFile = raw_input("N|Solid Runtime File (full path):\n")
+nsolidVersion = input("N|Solid Version:\n")
+consoleFile = input("N|Solid Console File (full path):\n")
+runtimeFile = input("N|Solid Runtime File (full path):\n")
 consoleContent = json.loads(open(consoleFile).read())
 runtimeContent = json.loads(open(runtimeFile).read())
 print("\nRunning...\n")
